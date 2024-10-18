@@ -30,10 +30,10 @@ class Fixed
 		bool	operator>=(Fixed const& obj);
 		bool	operator==(Fixed const& obj);
 		bool	operator!=(Fixed const& obj);
-		bool	operator+(Fixed const& obj);
-		bool	operator-(Fixed const& obj);
-		bool	operator*(Fixed const& obj);
-		bool	operator/(Fixed const& obj);
+		Fixed	operator+(Fixed const& obj);
+		Fixed	operator-(Fixed const& obj);
+		Fixed	operator*(Fixed const& obj);
+		Fixed	operator/(Fixed const& obj);
 		Fixed	operator++();
 		Fixed	operator++ (int);
 		Fixed	operator--();

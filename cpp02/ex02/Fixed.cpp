@@ -27,7 +27,7 @@ Fixed::Fixed(void)
 
 Fixed::Fixed( const int value )
 {
-	std::cout << "ici" << value << std::endl;
+	// std::cout << "ici" << value << std::endl;
 	this->value = (int)(value << this->fbits);
 }
 
@@ -91,22 +91,31 @@ bool	Fixed::operator!=(Fixed const& obj)
 	return (this->value != obj.value);
 }
 
-bool	Fixed::operator+(Fixed const& obj)
+Fixed		Fixed::operator+(Fixed const& obj)
 {
-	return (this->value + obj.value);
+	Fixed temp;
+	temp.setRawBits(this->value + obj.value);
+	return (temp);
 }
-bool	Fixed::operator-(Fixed const& obj)
+
+Fixed		Fixed::operator-(Fixed const& obj)
 {
-	return (this->value - obj.value);
+	Fixed temp;
+	temp.setRawBits(this->value - obj.value);
+	return (temp);
 }
-bool	Fixed::operator*(Fixed const& obj)
+
+Fixed		Fixed::operator*(Fixed const& obj)
 {
-	return (this->value * obj.value);
+	Fixed temp;
+	temp.setRawBits(this->value * obj.value >> fbits);
+	return (temp);
 }
-bool	Fixed::operator/(Fixed const& obj)
+Fixed		Fixed::operator/(Fixed const& obj)
 {
-	return (this->value / obj.value);
-}
+	Fixed temp;
+	temp.setRawBits(this->value * (1 << fbits) / obj.value);
+	return (temp);}
 
 Fixed	Fixed::operator++()
 {
