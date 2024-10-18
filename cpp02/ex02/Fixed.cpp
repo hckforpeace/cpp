@@ -17,38 +17,34 @@ int	Fixed::getRawBits() const
 // destructor
 Fixed::~Fixed()
 {
-	std::cout << "Destructor called" << std::endl;
 }
 
 // default constructors
-Fixed::Fixed()
+Fixed::Fixed(void)
 {
 	this->value = 0;
-	std::cout << "Default constructor called" << std::endl;
 }
 
 Fixed::Fixed( const int value )
 {
-	std::cout << "Int constructor called" << std::endl;
+	std::cout << "ici" << value << std::endl;
 	this->value = (int)(value << this->fbits);
 }
 
 Fixed::Fixed( const float value )
 {
-	std::cout << "Float constructor called "  << std::endl;
 	this->value = roundf(value * (1 << this->fbits));
 }
 
 Fixed::Fixed( const Fixed &fixed )
 {
-	std::cout << "Copy constructor called" << std::endl;
 	operator=(fixed);
 }
 
 // operator =overload  
 void Fixed::operator=(Fixed const& obj)
 {
-	std::cout << "Copy assignement operator called" << std::endl;
+	// std::cout << "Copy assignement operator called" << std::endl;
 	this->value = obj.getRawBits();
 }
 
@@ -120,8 +116,9 @@ Fixed	Fixed::operator++()
 
 Fixed	Fixed::operator++(int)
 {
-	this->value++;
-	return (*this);
+	Fixed temp;
+	temp.value = this->value++;
+	return (temp);
 }
 
 Fixed	Fixed::operator--()
@@ -132,25 +129,36 @@ Fixed	Fixed::operator--()
 
 Fixed	Fixed::operator--(int)
 {
-	this->value--;
-	return (*this);
+	Fixed temp;
+	temp.value = this->value--;
+	return (temp);
 }
 
-static Fixed& min(Fixed &obj1, Fixed &obj2)
+const	Fixed& Fixed::max(const Fixed& obj1, const Fixed& obj2)
 {
-
-}
-const static  Fixed& Fixed::min(const Fixed &obj1, const Fixed &obj2)
-{
-	 if (obj1.value > obj2.value)
-	 	return (obj12);
+	if (obj1.value < obj2.value)
+		return obj2;
 	return obj1;
 }
-static Fixed& max(Fixed &obj1, Fixed &obj2)
-{
 
+const	Fixed& Fixed::min(const Fixed& obj1, const Fixed& obj2)
+{
+	if (obj1.value > obj2.value)
+		return obj2;
+	return obj1;
 }
-const static  Fixed& max(const Fixed &obj1, const Fixed &obj2)
-{
 
+
+Fixed& Fixed::max( Fixed& obj1,  Fixed& obj2)
+{
+	if (obj1 < obj2)
+		return obj2;
+	return obj1;
+}
+
+Fixed& Fixed::min( Fixed& obj1,  Fixed& obj2)
+{
+	if (obj1 > obj2)
+		return obj2;
+	return obj1;
 }

@@ -10,10 +10,10 @@ class Fixed
 		int	value;
 		int const static fbits = 8;
 	public:
-		static Fixed& min(Fixed &obj1, Fixed &obj2);
-		const static  Fixed& min(const Fixed &obj1, const Fixed &obj2);
-		static Fixed& max(Fixed &obj1, Fixed &obj2);
-		const static  Fixed& max(const Fixed &obj1, const Fixed &obj2);
+		static			Fixed& min(Fixed& obj1, Fixed& obj2);
+		static const	Fixed& min(const Fixed& obj1, const Fixed& obj2);
+		static			Fixed& max(Fixed& obj1, Fixed& obj2);
+		static const	Fixed& max(const Fixed& obj1, const Fixed& obj2);
 		Fixed( void );
 		Fixed( const int value );		
 		Fixed( const float value );
@@ -35,9 +35,9 @@ class Fixed
 		bool	operator*(Fixed const& obj);
 		bool	operator/(Fixed const& obj);
 		Fixed	operator++();
-		Fixed	operator++(int);
+		Fixed	operator++ (int);
 		Fixed	operator--();
-		Fixed	operator--(int);
+		Fixed	operator-- (int);
 };
 
 #endif
