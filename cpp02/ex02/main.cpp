@@ -38,3 +38,26 @@ int main( void )
 	std::cout << Fixed::max( a, b ) << std::endl;
 	return 0;
 }
+
+/* int	main()
+{
+	Fixed a;
+	Fixed const b( Fixed( 5.05f ) * Fixed( 2 ) );
+	Fixed c( Fixed(5) + Fixed(5));
+	Fixed const d( Fixed(5.0f) + Fixed(5.0f));
+	Fixed const e( Fixed(5.0f) - Fixed(5.0f));
+
+	std::cout << "c <==> 5 + 5: " << c << std::endl;
+	std::cout << "d <==> 5.0 + 5.0: " << d << std::endl;
+	std::cout << "d <==> 5.0 - 5.0: " << e << std::endl;
+	std::cout << "--c: " << --c << std::endl;
+	std::cout << "c--: " << c-- << std::endl;
+	std::cout << "c: " << c << std::endl;
+	std::cout << ++a << std::endl;
+	std::cout << a << std::endl;
+	std::cout << a++ << std::endl;
+	std::cout << a << std::endl;
+	std::cout << b << std::endl;
+	std::cout << Fixed::max( a, b ) << std::endl;
+	return 0;
+} */

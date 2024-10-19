@@ -67,57 +67,58 @@ Fixed& Fixed::operator=(Fixed const& obj)
 }
 
 
-bool	Fixed::operator<(Fixed const& obj)
+bool	Fixed::operator<(Fixed const& obj) const
 {
 	return this->value < obj.value;
 }
 
-bool	Fixed::operator>(Fixed const& obj)
+bool	Fixed::operator>(Fixed const& obj) const
 {
 	return this->value > obj.value;
 }
 
-bool	Fixed::operator==(Fixed const& obj)
+bool	Fixed::operator==(Fixed const& obj) const
 {
 	return (this->value == obj.value);
 }
 
-bool	Fixed::operator<=(Fixed const& obj)
+bool	Fixed::operator<=(Fixed const& obj) const
 {
 	return (operator<(obj) || operator==(obj));
 }
-bool	Fixed::operator>=(Fixed const& obj)
+
+bool	Fixed::operator>=(Fixed const& obj) const
 {
 	return (operator>(obj) || operator==(obj));
 }
 
-bool	Fixed::operator!=(Fixed const& obj)
+bool	Fixed::operator!=(Fixed const& obj) const
 {
 	return (this->value != obj.value);
 }
 
-Fixed		Fixed::operator+(Fixed const& obj)
+Fixed		Fixed::operator+(Fixed const& obj) const
 {
 	Fixed temp;
 	temp.setRawBits(this->value + obj.value);
 	return (temp);
 }
 
-Fixed		Fixed::operator-(Fixed const& obj)
+Fixed		Fixed::operator-(Fixed const& obj) const
 {
 	Fixed temp;
 	temp.setRawBits(this->value - obj.value);
 	return (temp);
 }
 
-Fixed		Fixed::operator*(Fixed const& obj)
+Fixed		Fixed::operator*(Fixed const& obj) const
 {
 	Fixed temp;
 	temp.setRawBits(this->value * obj.value >> fbits);
 	return (temp);
 }
 
-Fixed		Fixed::operator/(Fixed const& obj)
+Fixed		Fixed::operator/(Fixed const& obj) const
 {
 	Fixed temp;
 	temp.setRawBits(this->value * (1 << fbits) / obj.value);
