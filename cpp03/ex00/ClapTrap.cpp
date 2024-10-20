@@ -1,5 +1,7 @@
 #include "ClapTrap.hpp"
 
+// Constructors
+
 ClapTrap::~ClapTrap(void)
 {
 	std::cout << "Destructor Called" << std::endl;
@@ -15,6 +17,12 @@ ClapTrap::ClapTrap(std::string name):name(name)
 	std::cout << "Constructor Called" << std::endl;
 }
 
+ClapTrap::ClapTrap(ClapTrap const &clp)
+{
+	operator=(clp);
+}
+
+//Methods
 void	ClapTrap::attack(const std::string& target)
 {
 	if (this->hitPoints > 0 && this->energyPoints > 0)
@@ -49,15 +57,29 @@ unsigned int	ClapTrap::getHitPoints(void) const
 {
 	return this->hitPoints;
 }
+
 unsigned int	ClapTrap::getEnergyPoints(void) const
 {
 	return this->energyPoints;
 }
+
 unsigned int	ClapTrap::getAttackDamage(void) const
 {
 	return this->attackDamage;
 }
+
 std::string		ClapTrap::getName(void) const
 {
 	return this->name;
+}
+
+// operator 
+
+ClapTrap&		ClapTrap::operator=(ClapTrap const &clp)
+{
+	this->name = clp.name;
+	this->attackDamage = clp.attackDamage;
+	this->energyPoints = clp.energyPoints;
+	this->hitPoints = clp.hitPoints;
+	return *this;
 }

@@ -30,7 +30,8 @@ ScavTrap::~ScavTrap(void)
 	std::cout << "ScavTrap Destructor Called" << std::endl;
 }
 
-//Method
+// Methods
+
 void	ScavTrap::guardGate(void)
 {
 	std::cout << "ScavTrap " << this->getName() << " is in now in Gate keeper mode" << std::endl;

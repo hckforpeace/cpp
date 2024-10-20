@@ -1,6 +1,5 @@
 #include "ClapTrap.hpp"
 
-
 //Constructors
 ClapTrap::ClapTrap(ClapTrap const &clp)
 {
@@ -12,17 +11,16 @@ ClapTrap::~ClapTrap(void)
 	std::cout << "ClapTrap Destructor Called" << std::endl;
 }
 
-ClapTrap::ClapTrap(void):name("John")
+ClapTrap::ClapTrap(void):name("John"), hitPoints(10), energyPoints(10), attackDamage(10)
 {
 	std::cout << "ClapTrap Constructor Called" << std::endl;
 }
 
-ClapTrap::ClapTrap(std::string name):name(name)
+ClapTrap::ClapTrap(std::string name):name(name), hitPoints(10), energyPoints(10), attackDamage(10)
 {
 	std::cout << "Constructor Called" << std::endl;
 }
 
-// Methods
 void	ClapTrap::attack(const std::string& target)
 {
 	if (this->hitPoints > 0 && this->energyPoints > 0)
@@ -53,7 +51,7 @@ void	ClapTrap::beRepaired(unsigned int amount)
 
 //getters
 
-unsigned int	ClapTrap::getHitPoints(void) const
+/* unsigned int	ClapTrap::getHitPoints(void) const
 {
 	return this->hitPoints;
 }
@@ -71,7 +69,6 @@ std::string		ClapTrap::getName(void) const
 	return this->name;
 }
 
-//Setters
 void			ClapTrap::setName(std::string name)
 {
 	this->name = name;
@@ -90,7 +87,7 @@ void			ClapTrap::setEnergyPoints(int points)
 void			ClapTrap::setAttackDamage(int damage)
 {
 	this->attackDamage = damage;
-}
+} */
 
 //operator
 ClapTrap&		ClapTrap::operator=(ClapTrap const &clp)

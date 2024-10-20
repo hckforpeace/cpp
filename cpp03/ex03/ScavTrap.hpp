@@ -4,7 +4,7 @@
 # include "ClapTrap.hpp"
 
 // inherits from ClapTrap
-class ScavTrap: public ClapTrap
+class ScavTrap: virtual public ClapTrap
 {
 	private:
 
@@ -16,7 +16,6 @@ class ScavTrap: public ClapTrap
 		void	guardGate(void);
 		ScavTrap& operator=(ScavTrap const &obj);
 		void	attack(const std::string& target);
-
 };
 
 #endif

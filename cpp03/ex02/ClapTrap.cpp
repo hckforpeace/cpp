@@ -1,6 +1,5 @@
 #include "ClapTrap.hpp"
 
-
 //Constructors
 ClapTrap::ClapTrap(ClapTrap const &clp)
 {
@@ -22,7 +21,6 @@ ClapTrap::ClapTrap(std::string name):name(name)
 	std::cout << "Constructor Called" << std::endl;
 }
 
-// Methods
 void	ClapTrap::attack(const std::string& target)
 {
 	if (this->hitPoints > 0 && this->energyPoints > 0)
@@ -71,7 +69,6 @@ std::string		ClapTrap::getName(void) const
 	return this->name;
 }
 
-//Setters
 void			ClapTrap::setName(std::string name)
 {
 	this->name = name;
