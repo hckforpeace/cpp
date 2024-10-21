@@ -7,21 +7,21 @@ ScavTrap::ScavTrap(ScavTrap const &obj)
 	operator=(obj);
 }
 
-ScavTrap::ScavTrap(std::string name)
+ScavTrap::ScavTrap(std::string _name)
 {
-	this->setHitPoints(100);
-	this->setEnergyPoints(50);
-	this->setAttackDamage(20);
-	this->setName(name);
+	this->_name = _name;
+	this->_hp = 100;
+	this->_ep = 50;
+	this->Damage = 20;
+	this->_name = _name;
 	std::cout << "ScavTrap Constructor Called" << std::endl;
 }
 
 ScavTrap::ScavTrap(void)
 {
-	this->setHitPoints(100);
-	this->setEnergyPoints(50);
-	this->setAttackDamage(20);
-	this->setName("John");
+	this->_hp = 100;
+	this->_ep = 50;
+	this->Damage = 20;
 	std::cout << "ScavTrap Constructor Called" << std::endl;
 }
 
@@ -33,24 +33,24 @@ ScavTrap::~ScavTrap(void)
 //Method
 void	ScavTrap::guardGate(void)
 {
-	std::cout << "ScavTrap " << this->getName() << " is in now in Gate keeper mode" << std::endl;
+	std::cout << "ScavTrap " << this->get_name() << " is in now in Gate keeper mode" << std::endl;
 }
 
 void	ScavTrap::attack(const std::string& target)
 {
 	if (this->getHitPoints() > 0 && this->getEnergyPoints() > 0)
 	{
-		std::cout << "ScavTrap " << this->getName() << " attacks " << target << ", causing " << this->getAttackDamage() << " points of damage!" << std::endl;
-		this->setEnergyPoints(this->getEnergyPoints() - 1);
+		std::cout << "ScavTrap " << this->get_name() << " attacks " << target << ", causing " << this->getAttackDamage() << " points of damage!" << std::endl;
+		this->_ep -= 1;
 	}
 }
 
 //Operator
 ScavTrap& ScavTrap::operator=(ScavTrap const &obj)
 {
-	this->setName(obj.getName());
-	this->setAttackDamage(obj.getAttackDamage());
-	this->setEnergyPoints(obj.getEnergyPoints());
-	this->setHitPoints(obj.getHitPoints());
+	this->_name = obj.get_name();
+	this->Damage =obj.getAttackDamage();
+	this->_ep = obj.getEnergyPoints();
+	this->_hp = obj.getHitPoints();
 	return *this;
 }

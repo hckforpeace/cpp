@@ -1,4 +1,4 @@
-NAME=ClapTrap
+_name=ClapTrap
 
 SRC= main.cpp ClapTrap.cpp
 
@@ -8,9 +8,9 @@ CC=c++
 
 CFLAGS= -Wall -Werror -Wextra
 
-all: $(NAME)
+all: $(_name)
 
-$(NAME): $(OBJ)
+$(_name): $(OBJ)
 	$(CC) $(CFLAGS) $^ -o $@
 
 %.o:%.cpp
@@ -20,6 +20,6 @@ clean:
 	rm -f $(OBJ)
 
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(_name)
 
 re:	fclean all

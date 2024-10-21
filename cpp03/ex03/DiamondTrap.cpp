@@ -1,26 +1,26 @@
 #include "DiamondTrap.hpp"
 
-DiamondTrap::DiamondTrap(std::string name)
-    : ClapTrap(name + "_clap_name"), ScavTrap(name), FragTrap(name), name(name)
+DiamondTrap::DiamondTrap(std::string _name)
+    : ClapTrap(_name + "_clap__name"), _name(_name)
 {
-    this->hitPoints = this->FragTrap::hitPoints;
-    this->energyPoints = this->ScavTrap::energyPoints;
-    this->attackDamage = this->FragTrap::attackDamage;
+    _hp = FragTrap::_hp;
+    _ep = ScavTrap::_ep;
+    Damage = FragTrap::Damage;
 
-    std::cout << "DiamondTrap Constructor called for " << name << std::endl;
+    std::cout << "DiamondTrap Constructor called for " << _name << std::endl;
 }
 
 void DiamondTrap::attack(const std::string target)
 {
-	this->ScavTrap::attack(target);
+	ScavTrap::attack(target);
 }
 
 void	DiamondTrap::whoAmI(void)\
 {
-	std::cout << "name: " << this->name << ", ClapTrap name: " << this->ClapTrap::name << std::endl;
+	std::cout << "_name: " << this->_name << ", ClapTrap _name: " << this->ClapTrap::_name << std::endl;
 }
 
 void	 DiamondTrap::display()
 {
-	std::cout << "attackdamage: " << this->attackDamage << ", hitpoints: " << this->hitPoints << ", energyPoints: " << this->energyPoints << std::endl;
+	std::cout << "Damage: " << Damage << ", _hp: " << _hp << ", _ep: " << _ep << std::endl;
 }

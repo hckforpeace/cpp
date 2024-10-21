@@ -5,12 +5,11 @@
 
 class FragTrap: virtual public ClapTrap
 {
-	private:
 	public:
 		FragTrap(FragTrap const &obj);
 		FragTrap(void);
 		~FragTrap(void);
-		FragTrap(std::string name);
+		FragTrap(std::string _name);
 		FragTrap& operator=(FragTrap const &obj);
 		void highFivesGuys(void);
 };

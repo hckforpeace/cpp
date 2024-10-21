@@ -1,6 +1,6 @@
-NAME=ScavTrap
+_name=ScavTrap
 
-SRC= main.cpp ClapTrap.cpp ScavTrap.cpp
+SRC= main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
@@ -8,9 +8,9 @@ CC=c++
 
 CFLAGS= -Wall -Werror -Wextra
 
-all: $(NAME)
+all: $(_name)
 
-$(NAME): $(OBJ)
+$(_name): $(OBJ)
 	$(CC) $(CFLAGS) $^ -o $@
 
 %.o:%.cpp
@@ -20,6 +20,6 @@ clean:
 	rm -f $(OBJ)
 
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(_name)
 
 re:	fclean all

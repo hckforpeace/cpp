@@ -5,22 +5,23 @@ FragTrap::FragTrap(FragTrap const &obj)
 	operator=(obj);
 }
 
-FragTrap::FragTrap(void)
+FragTrap::FragTrap(std::string _name)
 {
-	this->setHitPoints(100);
-	this->setEnergyPoints(100);
-	this->setAttackDamage(30);
-	this->setName("John");
+	this->_name = _name;
+	this->_hp = 100;
+	this->_ep = 100;
+	this->Damage = 30;
 	std::cout << "FragTrap Constructor Called" << std::endl;
 }
-FragTrap::FragTrap(std::string name)
+
+FragTrap::FragTrap()
 {
-	this->setHitPoints(100);
-	this->setEnergyPoints(100);
-	this->setAttackDamage(30);
-	this->setName(name);
+	this->_hp = 100;
+	this->_ep = 100;
+	this->Damage = 30;
 	std::cout << "FragTrap Constructor Called" << std::endl;
 }
+
 
 //Destructor
 FragTrap::~FragTrap(void)
@@ -31,14 +32,14 @@ FragTrap::~FragTrap(void)
 //Destructor
 void FragTrap::highFivesGuys(void)
 {
-	std::cout << "Hello I am ScravTrap" << this->getName() << ", I am positive and request a High Five" << std::endl;
+	std::cout << "Hello I am ScravTrap" << this->get_name() << ", I am positive and request a High Five" << std::endl;
 }
 
 FragTrap& FragTrap::operator=(FragTrap const &obj)
 {
-	this->setName(obj.getName());
-	this->setAttackDamage(obj.getAttackDamage());
-	this->setEnergyPoints(obj.getEnergyPoints());
-	this->setHitPoints(obj.getHitPoints());
+	this->_name = obj.get_name();
+	this->Damage = obj.getAttackDamage();
+	this->_ep = obj.getEnergyPoints();
+	this->_hp = obj.getHitPoints();
 	return *this;
 }

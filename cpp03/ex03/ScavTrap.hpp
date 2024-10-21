@@ -6,11 +6,9 @@
 // inherits from ClapTrap
 class ScavTrap: virtual public ClapTrap
 {
-	private:
-
 	public:
 		ScavTrap(ScavTrap const &obj);
-		ScavTrap(std::string name);
+		ScavTrap(std::string _name);
 		ScavTrap(void);
 		~ScavTrap(void);
 		void	guardGate(void);
