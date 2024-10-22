@@ -18,7 +18,7 @@ ClapTrap::ClapTrap(void):_name("Default"), _hp(10), _ep(10), Damage(10)
 
 ClapTrap::ClapTrap(std::string _name):_name(_name), _hp(10), _ep(10), Damage(10)
 {
-	std::cout << "Constructor Called" << std::endl;
+	std::cout << "ClapTrap Constructor Called" << std::endl;
 }
 
 void	ClapTrap::attack(const std::string& target)
@@ -68,26 +68,6 @@ std::string		ClapTrap::get_name(void) const
 {
 	return this->_name;
 }
-/*
-void			ClapTrap::set_name(std::string _name)
-{
-	this->_name = _name;
-}
-
-void			ClapTrap::setHitPoints(int points)
-{
-	this->_hp = points;
-}
-
-void			ClapTrap::setEnergyPoints(int points)
-{
-	this->_ep = points;
-}
-
-void			ClapTrap::setAttackDamage(int damage)
-{
-	this->Damage = damage;
-} */
 
 //operator
 ClapTrap&		ClapTrap::operator=(ClapTrap const &clp)

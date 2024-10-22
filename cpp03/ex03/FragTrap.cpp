@@ -31,7 +31,7 @@ FragTrap::~FragTrap(void)
 //Destructor
 void FragTrap::highFivesGuys(void)
 {
-	std::cout << "Hello I am ScravTrap" << this->_name << ", I am positive and request a High Five" << std::endl;
+	std::cout << "Hello I am FcravTrap " << this->_name << ", I am positive and request a High Five" << std::endl;
 }
 
 FragTrap& FragTrap::operator=(FragTrap const &obj)

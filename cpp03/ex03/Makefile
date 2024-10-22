@@ -1,4 +1,4 @@
-_name=Diamond
+_name=DiamondTrap
 
 SRC= main.cpp ClapTrap.cpp FragTrap.cpp ScavTrap.cpp DiamondTrap.cpp
 

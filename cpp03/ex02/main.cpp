@@ -18,6 +18,9 @@ int	main()
 
 	std::cout << scav << std::endl;
 	std::cout << frag << std::endl;
+
+	frag.highFivesGuys();
+	scav.guardGate();
 /* 	scav.attack("Mahmoud");
 	scav.takeDamage(20);
 	std::cout << scav;

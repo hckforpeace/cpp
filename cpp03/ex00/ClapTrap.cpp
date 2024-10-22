@@ -12,7 +12,7 @@ ClapTrap::ClapTrap(void):_hp(10), _ep(10), Damage(0)
 	std::cout << "Constructor Called" << std::endl;
 }
 
-ClapTrap::ClapTrap(std::string _name):_hp(10), _ep(10), Damage(0)
+ClapTrap::ClapTrap(std::string _name):_name(_name), _hp(10), _ep(10), Damage(0)
 {
 	std::cout << "Constructor Called" << std::endl;
 }
