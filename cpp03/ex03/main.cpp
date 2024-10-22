@@ -2,13 +2,13 @@
 #include "ScavTrap.hpp"
 #include "DiamondTrap.hpp"
 // overload the << operator
-/* std::ostream& operator<<(std::ostream& stream, const ClapTrap& obj)
+std::ostream& operator<<(std::ostream& stream, const ClapTrap& obj)
 {
 	std::cout << std::string(10, '*') << std::endl;
-	stream << "_name: " << obj._name << ", _hp: " << obj.getHitPoints() << ", _ep: " << obj.getEnergyPoints() << ", Damage: " << obj.getAttackDamage() << std::endl;
+	stream << "_name: " << obj.get_name() << ", _hp: " << obj.getHitPoints() << ", _ep: " << obj.getEnergyPoints() << ", Damage: " << obj.getAttackDamage() << std::endl;
 	std::cout << std::string(10, '*') << std::endl;
 	return stream;
-} */
+}
 
 int	main()
 {
@@ -33,7 +33,7 @@ int	main()
 	DiamondTrap Rihanna("Rihanna");
 
 	Rihanna.display();
-
+	std::cout << Rihanna << std::endl;
 	Rihanna.whoAmI();
 	return (0);
 }

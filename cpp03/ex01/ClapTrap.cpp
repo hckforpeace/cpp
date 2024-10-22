@@ -12,7 +12,7 @@ ClapTrap::~ClapTrap(void)
 	std::cout << "ClapTrap Destructor Called" << std::endl;
 }
 
-ClapTrap::ClapTrap(void):_name(""), _hp(10), _ep(10), Damage(0)
+ClapTrap::ClapTrap(void):_name("Default"), _hp(10), _ep(10), Damage(0)
 {
 	std::cout << "ClapTrap Constructor Called" << std::endl;
 }

@@ -37,9 +37,9 @@ void FragTrap::highFivesGuys(void)
 
 FragTrap& FragTrap::operator=(FragTrap const &obj)
 {
-	this->_name = obj.get_name();
-	this->Damage = obj.getAttackDamage();
-	this->_ep = obj.getEnergyPoints();
-	this->_hp = obj.getHitPoints();
+	this->_name = obj._name;
+	this->Damage = obj.Damage;
+	this->_ep = obj._ep;
+	this->_hp = obj._hp;
 	return *this;
 }

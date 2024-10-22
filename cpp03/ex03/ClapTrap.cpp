@@ -11,7 +11,7 @@ ClapTrap::~ClapTrap(void)
 	std::cout << "ClapTrap Destructor Called" << std::endl;
 }
 
-ClapTrap::ClapTrap(void):_name("John"), _hp(10), _ep(10), Damage(10)
+ClapTrap::ClapTrap(void):_name("Default"), _hp(10), _ep(10), Damage(10)
 {
 	std::cout << "ClapTrap Constructor Called" << std::endl;
 }
@@ -51,7 +51,7 @@ void	ClapTrap::beRepaired(unsigned int amount)
 
 //getters
 
-/* unsigned int	ClapTrap::getHitPoints(void) const
+ unsigned int	ClapTrap::getHitPoints(void) const
 {
 	return this->_hp;
 }
@@ -68,7 +68,7 @@ std::string		ClapTrap::get_name(void) const
 {
 	return this->_name;
 }
-
+/*
 void			ClapTrap::set_name(std::string _name)
 {
 	this->_name = _name;

@@ -13,7 +13,6 @@ ScavTrap::ScavTrap(std::string _name)
 	this->_hp = 100;
 	this->_ep = 50;
 	this->Damage = 20;
-	this->_name = _name;
 	std::cout << "ScavTrap Constructor Called" << std::endl;
 }
 
@@ -48,9 +47,9 @@ void	ScavTrap::attack(const std::string& target)
 //Operator
 ScavTrap& ScavTrap::operator=(ScavTrap const &obj)
 {
-	this->_name = obj.get_name();
-	this->Damage =obj.getAttackDamage();
-	this->_ep = obj.getEnergyPoints();
-	this->_hp = obj.getHitPoints();
+	this->_name = obj._name;
+	this->Damage = obj.Damage;
+	this->_ep = obj._ep;
+	this->_hp = obj._hp;
 	return *this;
 }

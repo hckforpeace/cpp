@@ -19,7 +19,6 @@ FragTrap::FragTrap(void): ClapTrap()
 	this->_hp = 100;
 	this->_ep = 100;
 	this->Damage = 30;
-	this->_name = "John";
 	std::cout << "FragTrap Constructor Called" << std::endl;
 }
 
