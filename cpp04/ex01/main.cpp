@@ -4,7 +4,7 @@
 #include "Cat.hpp"
 #include "Dog.hpp"
 
-int main()
+/* int main()
 {
 	// const WrongAnimal* meta = new WrongAnimal();
 	// const WrongAnimal* i = new WrongAnimal();
@@ -36,4 +36,24 @@ int main()
 	delete i;
 	delete j;
 	return 0;
+} */
+
+int	main()
+{
+	const int size = 10;
+	Animal* animalstab[size];
+
+
+	for (int i = 0; i < size / 2; i++)
+		animalstab[i] = new Cat();
+
+	for (int i = size / 2; i < size; i++)
+		animalstab[i] = new Dog();
+
+/* 	Animal* copycat = animalstab[2];
+	copycat->makeSound(); */
+
+	for (int i = 0; i < size; i++)
+		delete animalstab[i];
+	return (0);
 }

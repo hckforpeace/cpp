@@ -7,20 +7,26 @@ void Cat::makeSound(void) const
 
 Cat::Cat(void):Animal("Cat")
 {
+	this->brain = new Brain();
 	std::cout << "Cat Constructor Called" << std::endl;	
 }
 
 Cat::~Cat()
 {
+	delete this->brain;
 	std::cout << "Cat Destructor Called" << std::endl;	
 }
 
 Cat::Cat(const Cat &obj)
 {
+	std::cout << "Cat copy constructor" << std::endl;
 	operator=(obj);
 }
+
 Cat& Cat::operator=(const Cat &obj)
 {
+	std::cout << "Cat assignement constructor" << std::endl;
 	this->type = obj.type;
+	this->brain = new Brain(*obj.brain);
 	return (*this);
 }

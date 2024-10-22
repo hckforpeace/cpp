@@ -7,21 +7,25 @@ void Dog::makeSound(void) const
 
 Dog::Dog(void):Animal("Dog")
 {
+	this->brain = new Brain();
 	std::cout << "Dog Constructor Called" << std::endl;	
 }
 
 Dog::~Dog()
 {
+	delete this->brain;
 	std::cout << "Dog Destructor Called" << std::endl;	
 }
 
 Dog::Dog(const Dog &obj)
 {
+	std::cout << "Cat copy constructor" << std::endl;
 	operator=(obj);
 }
 
 Dog& Dog::operator=(const Dog &obj)
 {
 	this->type = obj.type;
+	this->brain = new Brain(*obj.brain);
 	return (*this);
 }
