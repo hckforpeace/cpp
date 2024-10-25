@@ -4,7 +4,7 @@
 
 ScavTrap::ScavTrap(ScavTrap const &obj): ClapTrap(obj)
 {
-	operator=(obj);
+	std::cout << "ScavTrap copy Constructor Called" << std::endl;
 }
 
 ScavTrap::ScavTrap(std::string _name): ClapTrap(_name)

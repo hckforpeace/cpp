@@ -4,6 +4,7 @@
 //Constructors
 ClapTrap::ClapTrap(ClapTrap const &clp)
 {
+	std::cout << "ClapTrap Constructor Called" << std::endl;
 	operator=(clp);
 }
 
@@ -19,7 +20,7 @@ ClapTrap::ClapTrap(void):_name("Default"), _hp(10), _ep(10), Damage(0)
 
 ClapTrap::ClapTrap(std::string _name):_name(_name), _hp(10), _ep(10), Damage(0)
 {
-	std::cout << "Constructor Called" << std::endl;
+	std::cout << "ClapTrap Constructor Called" << std::endl;
 }
 
 // Methods

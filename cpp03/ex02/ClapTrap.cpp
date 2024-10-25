@@ -4,6 +4,7 @@
 //Constructors
 ClapTrap::ClapTrap(ClapTrap const &clp)
 {
+	std::cout << "ClapTrap copy Constructor Called" << std::endl;
 	operator=(clp);
 }
 

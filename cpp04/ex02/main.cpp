@@ -38,22 +38,24 @@
 
 int	main()
 {
-	const Animal* j = new Dog();
-	const Animal* i = new Cat();
+	const Animal* Aj = new Dog();
+	const Animal* Ai = new Cat();
+	// const Animal* wrong = new Animal(); // wrong because the class Animal is abstract
+	// const Animal no;
 	const int size = 10;
-	Animal* animalstab[size];
+	Animal* Aanimalstab[size];
 
 
 	for (int i = 0; i < size / 2; i++)
-		animalstab[i] = new Cat();
+		Aanimalstab[i] = new Cat();
 
 	for (int i = size / 2; i < size; i++)
-		animalstab[i] = new Dog();
+		Aanimalstab[i] = new Dog();
 
 	for (int i = 0; i < size; i++)
-		delete animalstab[i];
-	delete i;
-	delete j;
+		delete Aanimalstab[i];
+	delete Ai;
+	delete Aj;
 	return (0);
 }
 /* 	Animal* copycat = animalstab[2];

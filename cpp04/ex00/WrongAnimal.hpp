@@ -11,8 +11,10 @@ class WrongAnimal
 		WrongAnimal();
 		~WrongAnimal();
 		WrongAnimal(std::string type);
+		WrongAnimal(const WrongAnimal &obj);
 		std::string getType(void) const;
 		void makeSound(void) const;
+		WrongAnimal& operator=(const WrongAnimal &obj);
 };
 
 #endif

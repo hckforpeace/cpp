@@ -30,5 +30,5 @@ int	main()
 	scav.beRepaired(10);
 	std::cout << scav;
 	scav.guardGate();
-	return (0);
+	return (0); 
 }

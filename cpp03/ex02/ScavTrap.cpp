@@ -2,9 +2,9 @@
 
 //Constructors
 
-ScavTrap::ScavTrap(ScavTrap const &obj)
+ScavTrap::ScavTrap(ScavTrap const &obj): ClapTrap(obj)
 {
-	operator=(obj);
+	std::cout << "ScavTrap Constructor Called" << std::endl;
 }
 
 ScavTrap::ScavTrap(std::string _name)

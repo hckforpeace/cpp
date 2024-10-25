@@ -21,5 +21,16 @@ std::string WrongAnimal::getType(void) const
 
 void WrongAnimal::makeSound(void) const
 {
-	std::cout << "Sound of an WrongAnimal" << std::endl;
+	std::cout << "Sound of a WrongAnimal" << std::endl;
+}
+
+WrongAnimal::WrongAnimal(const WrongAnimal &obj)
+{
+	operator=(obj);
+}
+
+WrongAnimal& WrongAnimal::operator=(const WrongAnimal &obj)
+{
+	this->type = obj.getType();
+	return (*this);
 }

@@ -4,21 +4,22 @@
 
 ClapTrap::~ClapTrap(void)
 {
-	std::cout << "Destructor Called" << std::endl;
+	std::cout << "ClapTrap Destructor Called" << std::endl;
 }
 
 ClapTrap::ClapTrap(void):_hp(10), _ep(10), Damage(0)
 {
-	std::cout << "Constructor Called" << std::endl;
+	std::cout << "ClapTrap Constructor Called" << std::endl;
 }
 
 ClapTrap::ClapTrap(std::string _name):_name(_name), _hp(10), _ep(10), Damage(0)
 {
-	std::cout << "Constructor Called" << std::endl;
+	std::cout << "ClapTrap Constructor Called" << std::endl;
 }
 
 ClapTrap::ClapTrap(ClapTrap const &clp)
 {
+	std::cout << "ClapTrap Copy Constructor Called" << std::endl;
 	operator=(clp);
 }
 

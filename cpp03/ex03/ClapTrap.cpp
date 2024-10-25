@@ -3,6 +3,7 @@
 //Constructors
 ClapTrap::ClapTrap(ClapTrap const &clp)
 {
+	std::cout << "ClapTrap Constructor Called" << std::endl;
 	operator=(clp);
 }
 

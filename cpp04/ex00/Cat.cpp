@@ -15,9 +15,9 @@ Cat::~Cat()
 	std::cout << "Cat Destructor Called" << std::endl;	
 }
 
-Cat::Cat(const Cat &obj)
+Cat::Cat(const Cat &obj): Animal("Cat")
 {
-	operator=(obj);
+	std::cout << "Cat Constructor Called" << std::endl;	
 }
 Cat& Cat::operator=(const Cat &obj)
 {

@@ -13,3 +13,12 @@ void WrongCat::makeSound(void) const
 {
 	std::cout << "Sound of a WrongCat Miaou..." << std::endl;
 }
+WrongCat::WrongCat(const WrongCat &obj):WrongAnimal("WrongCat")
+{
+	operator=(obj);
+}
+WrongCat& WrongCat::operator=(const WrongCat& obj)
+{
+	this->type = obj.getType();
+	return (*this);
+}

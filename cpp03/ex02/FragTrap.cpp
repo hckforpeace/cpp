@@ -1,8 +1,8 @@
 #include "FragTrap.hpp"
 
-FragTrap::FragTrap(FragTrap const &obj)
+FragTrap::FragTrap(FragTrap const &obj): ClapTrap(obj)
 {
-	operator=(obj);
+	std::cout << "FragTrap copy Constructor Called" << std::endl;	
 }
 
 FragTrap::FragTrap(std::string _name)
