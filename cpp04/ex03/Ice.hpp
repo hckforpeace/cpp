@@ -1,9 +1,10 @@
 #ifndef ICE_HPP
 #define ICE_HPP
 
+// class AMateria;
 #include "AMateria.hpp"
 
-class Ice:public AMateria
+class Ice: public AMateria
 {
 	public:
 		Ice();
