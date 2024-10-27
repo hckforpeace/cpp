@@ -2,7 +2,7 @@ NAME = bank
 
 SRC = Account.cpp tests.cpp
 
-OBJ = $(addprefix src/,$(SRC:.cpp=.o))
+OBJ = $(SRC:.cpp=.o)
 
 CC = c++
 
@@ -11,10 +11,10 @@ CFLAGS = -Wall -Werror -Wextra -std=c++98
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) -Iinclude $^ -o $@
+	$(CC) $(CFLAGS) $^ -o $@
 
 src/%.o: src/%.cpp
-	$(CC) $(CFLAGS) -c -Iinclude $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean: 
 	rm -f $(OBJ)

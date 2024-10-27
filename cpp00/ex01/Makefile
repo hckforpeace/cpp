@@ -4,8 +4,7 @@ MAIN=main.cpp
 
 SRC=Contact.cpp PhoneBook.cpp
 
-# Object files
-OBJ= $(addprefix src/,$(SRC:.cpp=.o))
+OBJ= $(SRC:.cpp=.o)
 
 CC=c++
 
@@ -14,10 +13,10 @@ CFLAGS= -Wall -Wextra -Werror -std=c++98
 all: $(NAME)
 
 $(NAME): $(OBJ) $(MAIN:.cpp=.o)
-	$(CC) $(CFLAGS) -Iinclude  $^ -o $(NAME)
+	$(CC) $(CFLAGS)  $^ -o $(NAME)
 
 %.o: %.cpp
-	$(CC) $(CFLAGS) -Iinclude -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -f $(OBJ) $(MAIN:.cpp=.o)
