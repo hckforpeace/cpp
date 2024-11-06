@@ -2,19 +2,25 @@
 #include <fstream>
 #include <cstring>
 
+FileReplace::FileReplace():filename(NULL), target(NULL), sub(NULL)
+{
+}
+
+
 FileReplace::FileReplace(std::string filename, std::string target, std::string replace): filename(filename), target(target), sub(replace)
 {
 }
 
 void	FileReplace::replace()
 {
-	std::ifstream myfile(this->filename);
+	std::string newfiles =  this->filename + ".replace";
+	std::ifstream myfile(this->filename.c_str());
 	std::string	line = "";
 	char c;
 
 	if (myfile.is_open())
 	{
-		std::ofstream newfile(this->filename + ".replace");
+		std::ofstream newfile(newfiles.c_str());
 		while (myfile)
 		{
 			c = myfile.get();

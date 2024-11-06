@@ -39,13 +39,13 @@ int	Account::getNbWithdrawals( void )
 
 Account::~Account( void )
 {
-	Account::_totalAmount -= this->_amount;
+/* 	Account::_totalAmount -= this->_amount;
 	Account::_nbAccounts -= 1;
 	Account::_totalNbDeposits -= this->_nbDeposits;
 	Account::_totalNbWithdrawals = this->_nbWithdrawals;
 
 	_displayTimestamp();
-	std::cout << "index:" << this->_accountIndex << ";amount:" << this->_amount << ";closed" << std::endl;
+	std::cout << "index:" << this->_accountIndex << ";amount:" << this->_amount << ";closed" << std::endl; */
 }
 
 Account::Account( int initial_deposit )

@@ -5,6 +5,7 @@
 
 class FileReplace{
 	public:
+		FileReplace();
 		FileReplace(std::string filename, std::string target, std::string replace);
 		void	replace();
 

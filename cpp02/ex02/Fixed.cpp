@@ -14,7 +14,6 @@ int	Fixed::getRawBits() const
 	return (this->value);
 }
 
-
 // converter
 float	Fixed::toFloat( void ) const
 {
@@ -67,68 +66,71 @@ Fixed& Fixed::operator=(Fixed const& obj)
 }
 
 
-bool	Fixed::operator<(Fixed const& obj)
+bool	Fixed::operator<(Fixed const& obj) const
 {
 	return this->value < obj.value;
 }
 
-bool	Fixed::operator>(Fixed const& obj)
+bool	Fixed::operator>(Fixed const& obj) const
 {
 	return this->value > obj.value;
 }
 
-bool	Fixed::operator==(Fixed const& obj)
+bool	Fixed::operator==(Fixed const& obj) const
 {
 	return (this->value == obj.value);
 }
 
-bool	Fixed::operator<=(Fixed const& obj)
+bool	Fixed::operator<=(Fixed const& obj) const
 {
 	return (operator<(obj) || operator==(obj));
 }
-bool	Fixed::operator>=(Fixed const& obj)
+bool	Fixed::operator>=(Fixed const& obj) const
 {
 	return (operator>(obj) || operator==(obj));
 }
 
-bool	Fixed::operator!=(Fixed const& obj)
+bool	Fixed::operator!=(Fixed const& obj) const
 {
 	return (this->value != obj.value);
 }
 
-Fixed		Fixed::operator+(Fixed const& obj)
+Fixed		Fixed::operator+(Fixed const& obj) const
 {
 	Fixed temp;
 	temp.setRawBits(this->value + obj.value);
 	return (temp);
 }
 
-Fixed		Fixed::operator-(Fixed const& obj)
+Fixed		Fixed::operator-(Fixed const& obj) const
 {
 	Fixed temp;
 	temp.setRawBits(this->value - obj.value);
 	return (temp);
 }
 
-Fixed		Fixed::operator*(Fixed const& obj)
+Fixed		Fixed::operator*(Fixed const& obj) const
 {
 	Fixed temp;
 	temp.setRawBits(this->value * obj.value >> fbits);
 	return (temp);
 }
 
-Fixed		Fixed::operator/(Fixed const& obj)
+Fixed		Fixed::operator/(Fixed const& obj) const
 {
 	Fixed temp;
 	temp.setRawBits(this->value * (1 << fbits) / obj.value);
-	return (temp);}
+	return (temp);
+}
 
+// Pre increment ++ Operator
 Fixed	Fixed::operator++()
 {
 	++this->value;
 	return (*this);
 }
 
+// Post increment ++ Operator
 Fixed	Fixed::operator++(int)
 {
 	Fixed temp;
@@ -136,12 +138,14 @@ Fixed	Fixed::operator++(int)
 	return (temp);
 }
 
+// Pre increment -- Operator
 Fixed	Fixed::operator--()
 {
 	--this->value;
 	return (*this);
 }
 
+// Post increment -- Operator
 Fixed	Fixed::operator--(int)
 {
 	Fixed temp;
@@ -152,14 +156,14 @@ Fixed	Fixed::operator--(int)
 // max / min
 const	Fixed& Fixed::max(const Fixed& obj1, const Fixed& obj2)
 {
-	if (obj1.value < obj2.value)
+	if (obj1 < obj2)
 		return obj2;
 	return obj1;
 }
 
 const	Fixed& Fixed::min(const Fixed& obj1, const Fixed& obj2)
 {
-	if (obj1.value > obj2.value)
+	if (obj1 > obj2)
 		return obj2;
 	return obj1;
 }

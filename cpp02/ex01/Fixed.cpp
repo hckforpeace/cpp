@@ -56,7 +56,7 @@ float	Fixed::toFloat( void ) const
 {
 	float res;
 
-	res = (float)this->value / ( 1 << this->fbits);
+	res = (float)this->value / (1 << this->fbits);
 	return (res);
 }
 

@@ -1,7 +1,6 @@
 #include "Point.hpp"
 
-// float area(Point const a, const Point b , const Point c);
-
+// Calculates the area p, b, a
 float area(Point const p, const Point b , const Point a)
 {
 	Fixed sum, v1, v2, v3;
@@ -20,10 +19,13 @@ float area(Point const p, const Point b , const Point a)
 		std::cout << "the point is on the triangle" << std::endl; 
 		return (-1);
 	}
-	// std::cout << "area value: " << area << std::endl;
 	return (area);
 }
-
+/* 
+	Calculate the area of the triangle
+	Calculate the area of the three triangles formed with the Point point and do the sum of them
+	compare the sum with the area
+*/
 bool bsp(Point const a, Point const b, Point const c, Point const point)
 {
 	float t_area = area(a, b, c);

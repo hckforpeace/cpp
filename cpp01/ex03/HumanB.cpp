@@ -6,9 +6,8 @@ HumanB::~HumanB()
 }
 
 
-HumanB::HumanB(std::string name)
+HumanB::HumanB(std::string name):name(name)
 {
-	this->name = name;
 }
 
 void	HumanB::setWeapon(Weapon &weapon)

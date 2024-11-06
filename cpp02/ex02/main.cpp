@@ -7,7 +7,7 @@ std::ostream& operator<<(std::ostream& stream, const Fixed &obj)
 	return stream;
 }
 
-/* int main( void ) {
+int main( void ) {
 	Fixed a;
 	Fixed const b( 10 );
 	Fixed const c( 42.42f );
@@ -23,9 +23,8 @@ std::ostream& operator<<(std::ostream& stream, const Fixed &obj)
 	std::cout << "d is " << d.toInt() << " as integer" << std::endl;
 	return 0;
 }
- */
 
-int main( void )
+/* int main( void )
 {
 	Fixed a;
 	Fixed const b( Fixed( 5.05f ) * Fixed( 2 ) );
@@ -36,28 +35,50 @@ int main( void )
 	std::cout << a << std::endl;
 	std::cout << b << std::endl;
 	std::cout << Fixed::max( a, b ) << std::endl;
+
 	return 0;
-}
+} */
 
 /* int	main()
 {
-	Fixed a;
-	Fixed const b( Fixed( 5.05f ) * Fixed( 2 ) );
-	Fixed c( Fixed(5) + Fixed(5));
-	Fixed const d( Fixed(5.0f) + Fixed(5.0f));
-	Fixed const e( Fixed(5.0f) - Fixed(5.0f));
+	// Fixed a;
+	// Fixed const b( Fixed( 5.05f ) * Fixed( 2 ) );
+	// Fixed c( Fixed(5) + Fixed(5));
+	// Fixed const d( Fixed(5.0f) + Fixed(5.0f));
+	// Fixed const e( Fixed(5.0f) - Fixed(5.0f));
 
-	std::cout << "c <==> 5 + 5: " << c << std::endl;
-	std::cout << "d <==> 5.0 + 5.0: " << d << std::endl;
-	std::cout << "d <==> 5.0 - 5.0: " << e << std::endl;
-	std::cout << "--c: " << --c << std::endl;
-	std::cout << "c--: " << c-- << std::endl;
-	std::cout << "c: " << c << std::endl;
-	std::cout << ++a << std::endl;
-	std::cout << a << std::endl;
-	std::cout << a++ << std::endl;
-	std::cout << a << std::endl;
-	std::cout << b << std::endl;
-	std::cout << Fixed::max( a, b ) << std::endl;
+	// std::cout << "c <==> 5 + 5: " << c << std::endl;
+	// std::cout << "d <==> 5.0 + 5.0: " << d << std::endl;
+	// std::cout << "d <==> 5.0 - 5.0: " << e << std::endl;
+	// std::cout << "--c: " << --c << std::endl;
+	// std::cout << "c--: " << c-- << std::endl;
+	// std::cout << "c: " << c << std::endl;
+	// std::cout << ++a << std::endl;
+	// std::cout << a << std::endl;
+	// std::cout << a++ << std::endl;
+	// std::cout << a << std::endl;
+	// std::cout << b << std::endl;
+	// std::cout << Fixed::max( a, b ) << std::endl;
+
+	Fixed a(10.2f);
+	Fixed b(15.3f);
+
+	std::cout << "b - a: " << b - a << std::endl;
+	std::cout << "a + b: " << a + b << std::endl;
+	std::cout << "a * b: " << a * b << std::endl;
+
+	Fixed c(20.0f);
+	Fixed d(10.0f);
+
+	Fixed e(3);
+
+	std::cout << "c / d: " << c / d << std::endl;
+	std::cout << "c * d: " << c * d << std::endl;
+
+	std::cout << "e++: " << e++ << std::endl;
+	std::cout << "e:   " << e << std::endl;
+
+
+
 	return 0;
 } */
