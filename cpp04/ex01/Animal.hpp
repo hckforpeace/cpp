@@ -5,14 +5,19 @@
 
 class Animal{
 	protected:
-		std::string type;
+		std::string _type;
 	public:
+		// Canonical Form
 		Animal(void);
-		Animal(std::string type);
 		virtual ~Animal();
-		Animal(const Animal &obj);
+		Animal(std::string type);
+		Animal(const Animal &copy);
+		Animal &operator=(const Animal& copy);
+
+		// Method(s)
 		virtual void makeSound(void) const;
-		Animal &operator=(const Animal& obj);
+		
+		// Getter
 		std::string getType(void) const;
 };
 

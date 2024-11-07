@@ -1,16 +1,21 @@
-#ifndef WRONGANIMAL_HPP
-# define WRINGANIMAL_HPP
+#ifndef WRONGCAT_HPP
+# define WRONGCAT_HPP
 
 #include "WrongAnimal.hpp"
 
 class WrongCat: public WrongAnimal
 {
 	public:
+		// Canonical Form
 		WrongCat();
 		~WrongCat();
-		WrongCat(const WrongCat &obj);
+		WrongCat(const WrongCat &copy);
+		WrongCat& operator=(const WrongCat& copy);
+		
+		// Overloaded method
 		void makeSound(void) const;
-		WrongCat& operator=(const WrongCat& obj);
 };
+
+
 
 #endif

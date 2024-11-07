@@ -2,22 +2,24 @@ NAME= ANIMAL
 
 SRC= main.cpp Cat.cpp Dog.cpp Animal.cpp WrongAnimal.cpp WrongCat.cpp
 
-OBJ= $(SRC:.cpp=.o)
+copy= $(SRC:.cpp=.o)
 
-CC=c++
+CXX=c++
 
-CFLAGS= -Wall -Werror -Wextra
+CXXFLAGS= -Wall -Werror -Wextra -std=c++98
+
+STD= -std=c++98
 
 all:$(NAME)
 
-$(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $^ -o $@
+$(NAME): $(copy)
+	$(CXX) $(CXXFLAGS) $(STD) $^ -o $@
 
 %.o:%.cpp
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) $(STD) -c $< -o $@
 
 clean:
-	rm -f $(OBJ)
+	rm -f $(copy)
 
 fclean: clean
 	rm -f $(NAME)

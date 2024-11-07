@@ -5,13 +5,14 @@
 
 class Brain
 {
-	public:
-		Brain();
-		~Brain();
-		Brain(const Brain& obj);
-		Brain&	operator=(const Brain &brain);
 	private:
 		std::string ideas[100];
+	public:
+		// Canoncical Form
+		Brain();
+		~Brain();
+		Brain(const Brain& copy);
+		Brain&	operator=(const Brain &copy);
 };
 
 #endif

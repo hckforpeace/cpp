@@ -5,10 +5,13 @@
 
 class Cat: public Animal{
 	public:
+		// Canonical Form
 		Cat(void);
 		~Cat();
-		Cat(const Cat &obj);
-		Cat& operator=(const Cat &obj);
+		Cat(const Cat &copy);
+		Cat& operator=(const Cat &copy);
+		
+		// Overloaded Method
 		void makeSound(void) const;
 };
 

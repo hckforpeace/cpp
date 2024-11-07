@@ -24,13 +24,17 @@ void WrongAnimal::makeSound(void) const
 	std::cout << "Sound of a WrongAnimal" << std::endl;
 }
 
-WrongAnimal::WrongAnimal(const WrongAnimal &obj)
+WrongAnimal::WrongAnimal(const WrongAnimal &copy)
 {
-	operator=(obj);
+	std::cout << "Animal constructor called" << std::endl;
+	operator=(copy);
 }
 
-WrongAnimal& WrongAnimal::operator=(const WrongAnimal &obj)
+WrongAnimal& WrongAnimal::operator=(const WrongAnimal &copy)
 {
-	this->type = obj.getType();
+	if (this == &copy)
+		return (*this);
+	std::cout << "Animal constructor called" << std::endl;
+	this->type = copy.getType();
 	return (*this);
 }

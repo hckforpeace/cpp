@@ -43,12 +43,17 @@ int	main()
 	const int size = 10;
 	Animal* animalstab[size];
 
+	std::cout << std::endl << "***CATS CREATION***" << std::endl;
 
 	for (int i = 0; i < size / 2; i++)
 		animalstab[i] = new Cat();
 
+	std::cout << std::endl << "***DOGS CREATION***" << std::endl ;
+
 	for (int i = size / 2; i < size; i++)
 		animalstab[i] = new Dog();
+
+	std::cout << std::string(50, '*') << std::endl;
 
 	for (int i = 0; i < size; i++)
 		delete animalstab[i];
@@ -56,5 +61,13 @@ int	main()
 	delete j;
 	return (0);
 }
+
+/* int	main()
+{
+	Dog A = Dog();
+	Dog b = A;
+	return (0);
+} */
+
 /* 	Animal* copycat = animalstab[2];
 	copycat->makeSound(); */

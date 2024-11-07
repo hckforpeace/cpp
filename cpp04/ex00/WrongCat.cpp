@@ -13,12 +13,16 @@ void WrongCat::makeSound(void) const
 {
 	std::cout << "Sound of a WrongCat Miaou..." << std::endl;
 }
-WrongCat::WrongCat(const WrongCat &obj):WrongAnimal("WrongCat")
+WrongCat::WrongCat(const WrongCat &copy):WrongAnimal("WrongCat")
 {
-	operator=(obj);
+	std::cout << "WrongCat constructor called" << std::endl;
+	*this = copy;
 }
-WrongCat& WrongCat::operator=(const WrongCat& obj)
+WrongCat& WrongCat::operator=(const WrongCat& copy)
 {
-	this->type = obj.getType();
+	if (this == &copy)
+		return (*this);
+	std::cout << "WrongCat destructor called" << std::endl;
+	this->type = copy.getType();
 	return (*this);
 }
