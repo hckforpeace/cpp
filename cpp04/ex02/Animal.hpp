@@ -3,16 +3,27 @@
 
 #include <iostream>
 
+/* 
+	To declare An abstract class you need to make at least one of it's functions purely virtual
+	by using "= 0"
+	then it will become virtual and not instanciable
+	This function Will absolutely need to be implemented in a derived class
+*/
 class Animal{
 	protected:
-		std::string type;
+		std::string _type;
 	public:
+		// Canonical Form
 		Animal(void);
-		Animal(std::string type);
 		virtual ~Animal();
-		Animal(const Animal &obj);
+		Animal(std::string type);
+		Animal(const Animal &copy);
+		Animal &operator=(const Animal& copy);
+
+		// Method(s)
 		virtual void makeSound(void) const = 0;
-		Animal &operator=(const Animal& obj);
+		
+		// Getter
 		std::string getType(void) const;
 };
 

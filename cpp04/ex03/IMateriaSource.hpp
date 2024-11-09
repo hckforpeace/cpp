@@ -4,6 +4,7 @@
 # include "AMateria.hpp" 
 # include <iostream>
 
+// Is an Interface
 class IMateriaSource
 {
 	public:

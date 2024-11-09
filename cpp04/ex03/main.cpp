@@ -6,7 +6,7 @@
 
 int main()
 {
-/* 	IMateriaSource* src = new MateriaSource();
+	IMateriaSource* src = new MateriaSource();
 	src->learnMateria(new Ice());
 	src->learnMateria(new Cure());
 	ICharacter* me = new Character("me");
@@ -19,10 +19,14 @@ int main()
 	me->use(0, *bob);
 	me->use(1, *bob);
 	delete bob;
-	delete me; */
-	// delete src;
+	delete me;
+	delete src;
+	return 0;
+}
 
-	// my tests
+/* int main()
+{
+		// my tests
 	IMateriaSource* src = new MateriaSource();
 	src->learnMateria(new Ice());
 	src->learnMateria(new Cure());
@@ -57,5 +61,4 @@ int main()
 	delete pepo;
 	delete me;
 	delete src;
-	return 0;
-}
+} */

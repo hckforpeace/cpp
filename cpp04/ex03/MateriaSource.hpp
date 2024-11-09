@@ -7,12 +7,14 @@
 class MateriaSource: public IMateriaSource
 {
 	private:
-		AMateria *matrials[4];
+		AMateria *materials[4];
 	public:
 		MateriaSource();
 		virtual ~MateriaSource();
 		void learnMateria(AMateria* m);
 		AMateria* createMateria(std::string const & type);
+		MateriaSource(const MateriaSource& copy);
+		MateriaSource& operator=(const MateriaSource& copy);
 
 };
 

@@ -7,6 +7,7 @@
 class AMateria;
 #include <iostream>
 
+// Interface or Purely virtual Class
 class ICharacter
 {
 	public:

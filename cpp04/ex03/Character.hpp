@@ -9,15 +9,18 @@ class Character: public ICharacter
 		AMateria	*items[4];
 		std::string name;
 	public:
+		// Canonical Form
 		Character();
 		Character(std::string name);
-		Character(Character const &obj);
-		virtual ~Character();
+		~Character();
+		Character(Character const &copy);
+		Character& operator=(Character const &copy);
+
+		// Methods
 		std::string const & getName() const;
 		void equip(AMateria* m);
 		void unequip(int idx);
 		void use(int idx, ICharacter& target);
-		Character& operator=(Character const &obj);
 		static AMateria	*dump[10];
 };
 

@@ -6,11 +6,16 @@
 class Cure:public AMateria
 {
 	public:
+		// Canonical Form
 		Cure();
 		~Cure();
-		Cure(const Cure &obj);
-		Cure &operator=(const Cure& obj);
+		Cure(const Cure &copy);
+		Cure &operator=(const Cure& copy);
 		AMateria* clone() const;
+
+		// Method
+		void use(ICharacter& target);
+
 };
 
 #endif

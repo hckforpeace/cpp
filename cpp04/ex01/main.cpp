@@ -38,7 +38,13 @@
 
 int	main()
 {
-	const Animal* j = new Dog();
+	Cat g;
+	Cat d;
+
+	d = g;
+
+	return 0;
+/* 	const Animal* j = new Dog();
 	const Animal* i = new Cat();
 	const int size = 10;
 	Animal* animalstab[size];
@@ -59,8 +65,16 @@ int	main()
 		delete animalstab[i];
 	delete i;
 	delete j;
-	return (0);
+	return (0); */
 }
+
+/* int	main()
+{
+	Dog basic;
+	{
+		Dog tmp = basic;
+	}
+} */
 
 /* int	main()
 {

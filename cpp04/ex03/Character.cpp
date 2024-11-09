@@ -14,17 +14,16 @@ Character::~Character()
 
 Character::Character():name("John")
 {
-	std::cout << "here" << std::endl;
+	std::cout << "Charcater Constructor called" << std::endl;
 	for (int i = 0; i < 4; i++)
 		this->items[i] = NULL;
-	std::cout << "Charcater Constructor called" << std::endl;
 }
 
 Character::Character(std::string name):name(name)
 {
+	std::cout << "Charcater Constructor called" << std::endl;
 	for (int i = 0; i < 4; i++)
 		this->items[i] = NULL;
-	std::cout << "Charcater Constructor called" << std::endl;
 }
 
 void Character::equip(AMateria* m)
@@ -34,9 +33,10 @@ void Character::equip(AMateria* m)
 		if (this->items[i] == NULL)
 		{
 			this->items[i] = m;
-			break ;
+			return ;
 		}
 	}
+	std::cout << "!!! Inventory is Full you need to unequip a Materia to add a new one !!!" << std::endl;
 }
 
 void Character::unequip(int idx)
@@ -44,19 +44,19 @@ void Character::unequip(int idx)
 	int i = 0;
 	if (! (idx >= 0 && idx <= 4))
 	{
-		std::cout << "index out of bound please choose between 0 and 3" << std::endl;
+		std::cout << "!!! index out of bound please choose between 0 and 3 !!!" << std::endl;
 		return ;
 	}
 	if (!this->items[idx])
 	{
-		std::cout << "Nothing to unequip at index " << idx << std::endl;
+		std::cout << "!!! Nothing to unequip at index " << idx << " !!!" << std::endl;
 		return ;
 	}
 	std::cout << "removing Materia at index " << idx << " from inventory" << std::endl;
 	while (i < 10 && dump[i])
 		i++;
 	if (i == 10)
-		std::cout << "dump is full some a Materia will be lost for ever";
+		std::cout << "!!! dump is full some a Materia will be lost for ever !!";
 	i %= 10;
 	dump[i] = this->items[idx];
 	this->items[idx] = NULL;
@@ -64,9 +64,9 @@ void Character::unequip(int idx)
 
 void	Character::use(int idx, ICharacter& target)
 {
-	if (! (idx >= 0 && idx <= 4))
+	if (! (idx >= 0 && idx < 4))
 	{
-		std::cout << "index out of bound please choose between 0 and 3" << std::endl;
+		std::cout << "!!! index out of bound please choose between 0 and 3 !!!" << std::endl;
 		return ;
 	}
 	if (this->items[idx] == NULL)
@@ -82,34 +82,33 @@ std::string const & Character::getName() const
 	return (this->name);
 }
 
-Character::Character(Character const &obj):name(obj.getName())
+Character::Character(const Character &copy) : name(copy.getName())
 {
-	for (int i = 0; i < 4; i++)
-	{
-		if (this->items[i])
-		{
-			std::cout << "deleting" << std::endl;
-			delete this->items[i];
-			if (obj.items[i])
-				this->items[i] = obj.items[i]->clone();
-			else
-				this->items[i];
-		}
-	}
-
+    std::cout << "Character copy constructor called" << std::endl;
+    for (int i = 0; i < 4; ++i)
+    {
+        if (copy.items[i])
+            this->items[i] = copy.items[i]->clone();
+        else
+            this->items[i] = NULL;
+    }
 }
 
-Character& Character::operator=(Character const &obj)
+Character &Character::operator=(const Character &copy)
 {
-	for (int i = 0; i < 4; i++)
-	{
-		if (this->items[i])
-		{
-			std::cout << "deleting" << std::endl;
-			delete this->items[i];
-		}
-	}
-	for (int i = 0; i < 4; i++)
-		this->items[i] = obj.items[i]->clone();
-	return (*this);
+    std::cout << "Character copy assignment operator called" << std::endl;
+    if (this != &copy)
+    {
+        for (int i = 0; i < 4; ++i)
+        {
+            if (this->items[i])
+                delete this->items[i];
+            if (copy.items[i])
+                this->items[i] = copy.items[i]->clone();
+            else
+                this->items[i] = NULL;
+        }
+        this->name = copy.getName();
+    }
+    return *this;
 }

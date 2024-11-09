@@ -26,7 +26,9 @@ Cat& Cat::operator=(const Cat &copy)
 	if (this == &copy)
 		return (*this);
 	std::cout << "Cat Assignement constructor called" << std::endl;
-	this->_type = copy._type;
-	this->brain = new Brain(*this->brain);
+	if (this->brain)
+		delete this->brain;
+	this->_type = copy.getType();
+	this->brain = new Brain(*copy.brain);
 	return (*this);
 }

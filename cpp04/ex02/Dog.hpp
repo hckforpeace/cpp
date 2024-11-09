@@ -8,10 +8,13 @@ class Dog: public Animal{
 	private:
 		Brain *brain;
 	public:
+		// Canonical Form
 		Dog(void);
 		~Dog();
-		Dog(const Dog &obj);
-		Dog& operator=(const Dog &obj);
+		Dog(const Dog &copy);
+		Dog& operator=(const Dog &copy);
+
+		// Overloaded method
 		void makeSound(void) const;
 };
 

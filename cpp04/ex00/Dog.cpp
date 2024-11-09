@@ -26,6 +26,6 @@ Dog& Dog::operator=(const Dog &copy)
 	if (this == &copy)
 		return (*this);
 	std::cout << "Dog Assignement constructor called" << std::endl;
-	this->_type = copy._type;
+	this->_type = copy.getType();
 	return (*this);
 }
