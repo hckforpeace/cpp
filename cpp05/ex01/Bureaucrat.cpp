@@ -36,7 +36,6 @@ Bureaucrat&  Bureaucrat::operator=(const Bureaucrat &copy)
 	return (*this);
 }
 
-
 // Eceptions
 const char * Bureaucrat::GradeTooHighException::what() const throw()
 {
@@ -73,4 +72,23 @@ void	Bureaucrat::decrementGrade()
 	if (this->getGrade() + 1 > 150)
 		throw(GradeTooLowException());
 	this->_grade++;
+}
+
+void	Bureaucrat::signForm(Form &form) const
+{
+	if (form.getIsSign())
+		std::cout << this->getName() << " couldn't sign " << form.getName() << " because it's already signed" << std::endl;
+	else
+	{
+		try
+		{
+			form.beSigned(*this);
+		}
+		catch(const std::exception& e)
+		{
+			std::cout << this->getName() << " couldn't sign " << form.getName() << " because " << e.what()<< std::endl;
+			return ;
+		}
+		std::cout << this->getName() << " signed " << form.getName() << std::endl;
+	}
 }
