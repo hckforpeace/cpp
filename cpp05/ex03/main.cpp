@@ -3,15 +3,17 @@
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
+#include "Intern.hpp"
 // Constructor Tests
 int	main()
 {
+	Intern bob;
 	// Robottomysation
-	AForm *r = new RobotomyRequestForm("DIDI");
-	Bureaucrat LOLO("lolo", 26);
+	AForm* f = bob.makeForm("shrubbery creation", "people");
+	Bureaucrat LOLO("lolo", 1);
 	std::cout << std::string(50, '*') << std::endl; 
-	LOLO.signForm(*r);
-	LOLO.executeForm(*r);
+	LOLO.signForm(*f);
+	LOLO.executeForm(*f);
 	std::cout << std::string(50, '*') << std::endl;
 
 	// Shruberry
@@ -31,7 +33,7 @@ int	main()
 	std::cout << std::string(50, '*') << std::endl; */
 
 
-	delete r;
+	// delete r;
 	// delete s;
 	// delete p;
 	return (0);

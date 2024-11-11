@@ -1,5 +1,8 @@
 #include "Form.hpp"
 
+/* ************************************************************************** */
+/*                             Canonical Form                                 */
+/* ************************************************************************** */
 Form::Form():_name("Polution"), _isSigned(false), _gradeSign(75), _gradeExec(75)
 {
 	std::cout << "Default form constructor was called" << std::endl;
@@ -34,7 +37,9 @@ Form& Form::operator=(const Form& copy)
 	return *this;
 }
 
-// Getters
+/* ************************************************************************** */
+/*                             Getters                                        */
+/* ************************************************************************** */
 int Form::getGradeSign() const
 {
 	return (this->_gradeSign);
@@ -52,7 +57,9 @@ bool Form::getIsSign() const
 	return (this->_isSigned);
 }
 
-// Exceptions
+/* ************************************************************************** */
+/*                             Exceptions                             		  */
+/* ************************************************************************** */
 const char *Form::GradeTooHighException::what() const throw()
 {
 	return ("Grade is too high");
@@ -63,10 +70,19 @@ const char *Form::GradeTooLowException::what() const throw()
 	return ("Grade is too low");
 }
 
+
 void	Form::beSigned(const Bureaucrat& obj)
 {
 	if (obj.getGrade() > this->getGradeSign())
 		throw GradeTooLowException();
 	this->_isSigned = true;
+}
+
+std::ostream&	operator<<(std::ostream &stream, Form &form)
+{
+	stream << "Name: " << form.getName()
+	<< " IsSigned: " << form.getIsSign()
+	<< " Grade Execution: " << form.getGradeExec()
+	<< " Grade Signature: " << form.getGradeSign() <<std::endl;
 }
 

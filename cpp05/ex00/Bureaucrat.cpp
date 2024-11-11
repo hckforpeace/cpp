@@ -1,5 +1,8 @@
 #include "Bureaucrat.hpp"
 
+/* ************************************************************************** */
+/*                             Canonical Form                                 */
+/* ************************************************************************** */
 Bureaucrat::~Bureaucrat()
 {
 	std::cout << "Bureaucrat destructor called" << std::endl;
@@ -37,7 +40,9 @@ Bureaucrat&  Bureaucrat::operator=(const Bureaucrat &copy)
 }
 
 
-// Eceptions
+/* ************************************************************************** */
+/*                             Exceptions                             		  */
+/* ************************************************************************** */
 const char * Bureaucrat::GradeTooHighException::what() const throw()
 {
 	return ("Error the grade is too High !!");
@@ -48,7 +53,9 @@ const char * Bureaucrat::GradeTooLowException::what() const throw()
 	return ("Error the grade is too Low !!");
 }
 
-// Getters
+/* ************************************************************************** */
+/*                             	Getters                             		  */
+/* ************************************************************************** */
 int Bureaucrat::getGrade() const
 {
 	return (this->_grade);
@@ -73,4 +80,11 @@ void	Bureaucrat::decrementGrade()
 	if (this->getGrade() + 1 > 150)
 		throw(GradeTooLowException());
 	this->_grade++;
+}
+
+// Overload Display
+std::ostream&	operator<<(std::ostream& stream, const Bureaucrat& obj)
+{
+	stream << obj.getName() << ", bureaucrat grade " << obj.getGrade() << ".";
+	return (stream);
 }

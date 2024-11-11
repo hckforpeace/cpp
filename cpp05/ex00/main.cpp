@@ -1,11 +1,5 @@
 #include "Bureaucrat.hpp"
 
-std::ostream&	operator<<(std::ostream& stream, const Bureaucrat& obj)
-{
-	stream << obj.getName() << ", bureaucrat grade " << obj.getGrade() << ".";
-	return (stream);
-}
-
 // Constructor Tests
 int	main()
 {

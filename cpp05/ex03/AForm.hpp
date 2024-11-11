@@ -6,7 +6,7 @@
 
 class Bureaucrat;
 
-class Form
+class AForm
 {
 	private:
 		const std::string _name;
@@ -14,12 +14,12 @@ class Form
 		const int	_gradeSign;
 		const int	_gradeExec;
 	public:
-		// Canonic Form
-		Form();
-		~Form();
-		Form(std::string name, const int gradeSign, const int gradeExec);
-		Form(const Form& copy);
-		Form&	operator=(const Form& copy);
+		// Canonic AForm
+		AForm();
+		virtual ~AForm();
+		AForm(std::string name, const int gradeSign, const int gradeExec);
+		AForm(const AForm& copy);
+		AForm&	operator=(const AForm& copy);
 
 		// Getters
 		int getGradeSign() const;
@@ -37,10 +37,18 @@ class Form
 			const char * what() const throw();
 		};
 
-		void	beSigned(const Bureaucrat& obj);
+		class FormNotSignedException: public std::exception
+		{
+			const char * what() const throw();
+		};
 
+		void	beSigned(const Bureaucrat& obj);
+		
+		// Execute
+		virtual void execute(Bureaucrat const & executor) const = 0;
 };
 
-std::ostream&	operator<<(std::ostream &stream, Form &form);
+std::ostream&	operator<<(std::ostream &stream, AForm &form);
+
 
 #endif
