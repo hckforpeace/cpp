@@ -13,29 +13,27 @@ Bureaucrat::Bureaucrat():_name("Alan"), _grade(1)
 	std::cout << "Bureaucrat default constructor called" << std::endl;
 }
 
-Bureaucrat::Bureaucrat(std::string name, int grade)
+Bureaucrat::Bureaucrat(std::string name, int grade):_name(name), _grade(grade)
 {
 	std::cout << "Bureaucrat constructor called" << std::endl;
 	if (grade > 150)
 		throw(GradeTooLowException());
 	else if (grade < 1)
 		throw(GradeTooHighException());
-	this->_grade = grade;
-	this->_name = name;
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat &b)
+Bureaucrat::Bureaucrat(const Bureaucrat &b):_name(b.getName())
 {
 	std::cout << "Bureaucrat copy constructor called" << std::endl;
 	*this = b;
 }
+
 Bureaucrat&  Bureaucrat::operator=(const Bureaucrat &copy)
 {
 	std::cout << "Bureaucrat assignment constructor called" << std::endl;
 	if (this == &copy)
 		return (*this);
 	this->_grade = copy.getGrade();
-	this->_name = copy.getName();
 	return (*this);
 }
 

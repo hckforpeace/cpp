@@ -36,6 +36,24 @@ int	main()
 		std::cout << e.what() << " grade must be between 1 and 150" << std::endl;	
 	}
 	std::cout << "outside the scope" << std::endl;
+	// Bureaucrat Bob("bob", 15);
+	// try{
+
+	// 	// while (1)
+	// 	// {
+	// 	// 	Bob.incrementGrade();
+	// 	// 	std::cout << Bob << std::endl;
+	// 	// }
+	// 	while (1)
+	// 	{
+	// 		Bob.decrementGrade();
+	// 		std::cout << Bob << std::endl;
+	// 	}
+	// }
+	// catch(std::exception &e)
+	// {
+	// 	std::cout << e.what() << std::endl;
+	// }
 
 	return (0);
 }

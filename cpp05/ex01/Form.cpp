@@ -84,5 +84,6 @@ std::ostream&	operator<<(std::ostream &stream, Form &form)
 	<< " IsSigned: " << form.getIsSign()
 	<< " Grade Execution: " << form.getGradeExec()
 	<< " Grade Signature: " << form.getGradeSign() <<std::endl;
+	return (stream);
 }
 

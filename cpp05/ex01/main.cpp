@@ -1,11 +1,5 @@
 #include "Bureaucrat.hpp"
 
-std::ostream&	operator<<(std::ostream& stream, const Bureaucrat& obj)
-{
-	stream << obj.getName() << ", bureaucrat grade " << obj.getGrade() << ".";
-	return (stream);
-}
-
 // Constructor Tests
 int	main()
 {
@@ -36,6 +30,7 @@ int	main()
 	Wolf.signForm(retirement);
 	// the form is already signed
 	Wolf.signForm(retirement);
+	// std::cout << retirement << std::endl;
 
 	// sign form will throw an exception
 	std::cout << std::string(50, '*') << std::endl;

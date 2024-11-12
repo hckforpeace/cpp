@@ -53,5 +53,6 @@ AForm*	Intern::makeForm(std::string form, std::string target) const
 			return (fun[i])(target);
 		}
 	}
+	std::cout << "Form " << form << " was not found" << std::endl;
 	return (NULL);
 }
