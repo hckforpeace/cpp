@@ -9,5 +9,7 @@ int	main(int argc, char** argv)
 		std::string input = argv[1];
 		ScalarConverter::convert(input);
 	}
+	else
+		std::cout << "./convert integer, float or double" << std::endl;
 	return (0);
 }

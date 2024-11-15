@@ -11,7 +11,10 @@ bool	is_digit(char c)
 
 bool	is_number(std::string s)
 {
-	for (unsigned int i = 0; i < s.length(); i++)
+	unsigned int f =0;
+	if (s[f] == '-')
+		f++;
+	for (unsigned int i = f; i < s.length(); i++)
 	{
 		if (!is_digit(s[i]))
 			return (false);

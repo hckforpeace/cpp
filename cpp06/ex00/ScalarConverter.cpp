@@ -37,7 +37,7 @@ void	ScalarConverter::convert(std::string value)
 		}
 	}
 	else
-		std::cout << "Error! Wrong input !" << std::endl;
+		std::cout << "Error! Wrong input ! ./convert integer, float or double" << std::endl;
 }
 
 ScalarConverter::ScalarConverter()

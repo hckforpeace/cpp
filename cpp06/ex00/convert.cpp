@@ -4,7 +4,7 @@
 void	display(int i, unsigned char c, float f, double d, int precision)
 {
 	std::cout << "char: ";
-	if (c >= 32 && c <= 126)
+	if (i >= 32 && i <= 126)
 		std::cout << "'" << c << "'" << std::endl;
 	else
 		std::cout << "Non displayable" << std::endl;
@@ -41,7 +41,7 @@ void	from_int(int i, int precision)
 void	from_double(double d, int precision)
 {
 	float f = static_cast<float>(d);
-	unsigned char c = static_cast<unsigned char>(d);
+	char c = static_cast<char>(d);
 	int i = static_cast<int>(d);
 	display(i, c, f, d, precision);
 }

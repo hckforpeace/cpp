@@ -1,6 +1,7 @@
 NAME= Serializer
 
 SRC= main.cpp  functions.cpp
+
 OBJ= $(SRC:.cpp=.o)
 
 CXX= c++

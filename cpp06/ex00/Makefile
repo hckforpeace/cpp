@@ -1,4 +1,4 @@
-NAME= convert
+NAME= Convert
 
 SRC= main.cpp ScalarConverter.cpp parse_string.cpp convert.cpp
 
