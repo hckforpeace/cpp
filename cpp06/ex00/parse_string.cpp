@@ -48,14 +48,14 @@ bool	parse_string(std::string data)
 
 bool is_special_case(std::string s)
 {
-	if (!s.compare("-inf") || !s.compare("+inf") || !s.compare("-inff") || !s.compare("+inff") || !s.compare("nan"))
+	if (!s.compare("-inf") || !s.compare("+inf") || !s.compare("-inff") || !s.compare("+inff") || !s.compare("nan") || !s.compare("nanf"))
 		return (true);
 	return (false);
 }
 
 void	parse_special_charachter(std::string value)
 {
-	std::string tab[5] = {"nan", "+inf", "-inf", "-inff", "+inff"};
+	std::string tab[6] = {"nan", "+inf", "-inf", "-inff", "nanf", "+inff"};
 	for (int i = 0; i < 5; i++)
 	{
 		if (!value.compare(tab[i]))
