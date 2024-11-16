@@ -1,3 +1,65 @@
+/* #ifndef ARRAY_HPP
+#define ARRAY_HPP
+
+#include <exception>
+
+template <typename T>
+class Array{
+	private:
+		T	*_tab;
+		int	_size;
+	public:
+		~Array<T>()
+		{
+			delete[] _tab;
+		}
+		Array<T>():_tab(0), _size(new T[0]){}
+		Array<T>(int n):_tab(new T[n]), _size(n){}
+		Array<T>(const Array<T>& copy)
+		{
+			this->_size = copy.size();
+			this->_tab = new T[this->_size];
+
+			for (int i = 0; i < this->_size; i++)
+				this->_tab[i] = copy[i];
+		}
+
+		T&	operator[](int i)
+		{
+			if (i > this->size() - 1 || i < 0)
+				throw std::out_of_range("out of range");
+			else
+				return (this->_tab[i]);
+		}
+
+
+		const Array<T>& operator=(const Array<T>& copy)
+		{
+			if (this == &copy)
+				return (*this);
+			if (copy.size() == 0)
+			{
+				this->_size = 0;
+				this->_tab = 0;
+			}
+			else
+			{
+				this->_size = copy.size();
+				this->_tab = new T[this->_size];
+				for (int i = 0; i < this->_size; i++)
+					this->_tab[i] = copy._tab[i];
+			}
+			return (*this);
+		}
+
+		int	size(void) const
+		{
+			return (this->_size);
+		}
+};
+
+#endif */
+
 #ifndef ARRAY_HPP
 #define ARRAY_HPP
 
@@ -7,59 +69,42 @@ template <typename T>
 class Array
 {
 	private:
-		T	*_values;
-		unsigned int	_size;
+		unsigned int _size;
+		T	*tab;
 	public:
-		Array()
+		~Array(){delete[] this->tab;}
+		Array<T>():_size(0), tab(new T[0]){}
+		Array<T>(unsigned int n):_size(n), tab(new T[n]){}
+		Array<T>(const Array<T>& copy)
 		{
-			_values = NULL;
+			this->_size = copy.size();
+			this->tab = new T[this->_size];
+			for (unsigned int i = 0; i < this->_size; i++)
+				this->tab[i] = copy.tab[i];
 		}
 
-		Array(unsigned int n):_size(n), _values(new T[n])
+		Array<T>& operator=(const Array<T>& copy)
 		{
-		}
-
-		Array(Array<T> &copy)
-		{
-			this->_values = new T[copy.getLen()];
-			for (int i =0; i < copy.getLen(); i++)
-				this->_values[i] = copy.getValue(i);
-		}
-		
-		Array<T> &operator=(const Array<T> copy)
-		{
-			if (*this == copy)
+			if (this == &copy)
 				return (*this);
-			for (int i =0; i < copy.getLen(); i++)
-				this->_values[i] = copy.getValue(i);
+			delete[] tab;
+			this->_size = copy.size();
+			this->tab = new T[this->_size];
+			for (unsigned int i = 0; i < this->_size; i++)
+				this->tab[i] = copy.tab[i];
 			return (*this);
 		}
 
-		T	operator[](unsigned int i)
+
+		T& operator[](int i)
 		{
-			if (i > this->_size)
-				throw (ArrayOutOfBoundException());
-			return (this->_values[i]);
+			unsigned int index = static_cast<unsigned int>(i);
+			if (i < 0 || index >= this->_size)
+				throw std::out_of_range("index is out of bound");
+			return (this->tab[i]);
 		}
 
-		unsigned int getLen()
-		{
-			return (this->_size);
-		}
-
-		T	size(unsigned int i) const
-		{
-			return (this->_size);
-		}
-
-
-	class ArrayOutOfBoundException: std::exception
-	{
-		virtual const char * what() throw
-		{
-			return ("index out of bound");
-		}
-	}
+		unsigned int	size(void) const {return (this->_size);}
 };
 
 #endif
