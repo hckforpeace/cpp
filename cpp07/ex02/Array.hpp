@@ -104,6 +104,14 @@ class Array
 			return (this->tab[i]);
 		}
 
+		T const & operator[](int i) const
+		{
+			unsigned int index = static_cast<unsigned int>(i);
+			if (i < 0 || index >= this->_size)
+				throw std::out_of_range("index is out of bound");
+			return (this->tab[i]);
+		}
+
 		unsigned int	size(void) const {return (this->_size);}
 };
 

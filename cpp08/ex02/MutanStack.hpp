@@ -7,7 +7,8 @@
 template <typename T>
 class MutanStack: public std::stack<T>
 {
-	typedef typename std::stack<T>::container_type
+	public:
+		typedef typename std::stack<T>::
 };
 
 #endif

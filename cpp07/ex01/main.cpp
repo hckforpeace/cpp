@@ -17,6 +17,10 @@ void	increment(int &i)
 	i++;
 }
 
+void	display(std::string const &str)
+{
+	std::cout << str << std::endl;
+}
 
 int	main(void)
 {
