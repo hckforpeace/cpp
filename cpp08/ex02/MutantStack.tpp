@@ -1,6 +1,5 @@
 #include "MutantStack.hpp"
 
-// non const
 
 template <typename T>
 typename MutantStack<T>::iterator MutantStack<T>::begin()

@@ -16,19 +16,24 @@ class Span
 		int	getMax();
 		int getMin();
 	public:
+		// Canonical
 		Span();
 		Span(unsigned int N);
 		Span(const Span& copy);
 		Span&	operator=(const Span& copy);
 
+		// Public member functions
+		void 	addNumber(int values);
+		void	addNumbers(std::vector<int>::iterator begin, std::vector<int>::iterator end);
+		int		shortestSpan(void);
+		int		longestSpan(void);
+		void	displayValues();
+		static void	display(int element);
 
-		void addNumber(int values);
-		void addNumber();
-		int	shortestSpan(void);
-		int	longestSpan(void);
-
+		// getter
 		const std::vector<int>& getTab(void) const;
-		
+
+		// Exeption
 		class FullSpanExcpetion: public std::exception
 		{
 			const char* what() const throw();

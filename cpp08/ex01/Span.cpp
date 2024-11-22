@@ -1,5 +1,9 @@
 #include "Span.hpp"
 
+/* ************************************************************************** */
+/*                             Canonical Form                                 */
+/* ************************************************************************** */
+
 Span::Span():_N(2){};
 
 Span::Span(unsigned int N):_N(N) {}
@@ -17,6 +21,9 @@ Span&	Span::operator=(const Span& copy)
 	return (*this);
 }
 
+/* ************************************************************************** */
+/*                             Public member functions                        */
+/* ************************************************************************** */
 
 void Span::addNumber(int value)
 {
@@ -25,16 +32,24 @@ void Span::addNumber(int value)
 	this->tab.push_back(value);
 }
 
-void Span::addNumber()
+void Span::addNumbers(std::vector<int>::iterator begin, std::vector<int>::iterator end)
 {
-	this->tab.resize(this->_N);
-	std::srand(time(NULL));
-	for (std::vector<int>::iterator it = this->tab.begin(); it != this->tab.end(); it++)
-	{
-		*it = std::rand();
-	}
+	unsigned int len = std::distance(begin, end);
+	if (len > this->_N)
+		throw Span::SpanTooSmallExcpetion();
+	this->tab.assign(begin, end);
 }
 
+// Static
+void	Span::display(int element)
+{
+	std::cout << element << std::endl;
+}
+
+void Span::displayValues()
+{
+	std::for_each(this->tab.begin(), this->tab.end(), display);
+}
 
 int	Span::shortestSpan()
 {
@@ -61,6 +76,10 @@ int	Span::longestSpan()
 	return (max - min);
 }
 
+/* ************************************************************************** */
+/*                                  Private Getters                           */
+/* ************************************************************************** */
+
 int	Span::getMax()
 {
 	int max = this->tab.at(0);
@@ -82,6 +101,9 @@ int Span::getMin()
 	return (min);
 }
 
+/* ************************************************************************** */
+/*                                 Exceptions                                 */
+/* ************************************************************************** */
 
 const char * Span::FullSpanExcpetion::what() const throw()
 {
@@ -93,11 +115,19 @@ const char * Span::SpanTooSmallExcpetion::what() const throw()
 	return ("Span too small !");
 }
 
+/* ************************************************************************** */
+/*                                  Public Getter                             */
+/* ************************************************************************** */
+
 const std::vector<int>&	Span::getTab(void) const
 {
 	return this->tab;
 }
 
+
+/* ************************************************************************** */
+/*                             Overload operator                              */
+/* ************************************************************************** */
 std::ostream& operator<<(std::ostream& stream, const Span &obj)
 {
 	std::vector<int> tab = obj.getTab();
