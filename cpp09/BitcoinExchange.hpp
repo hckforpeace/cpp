@@ -2,14 +2,15 @@
 #define BITCOINEXCHANGE_HPP
 
 #include <iostream>
+#include <string>
+#include <sstream>
 #include <map>
 #include <exception>
 #include <fstream>
 #include <ctime>
-#include <string>
 
 #define FORMAT "%Y-%m-%d"
-#define DB_NAME "empty.csv"
+#define DB_NAME "data.csv"
 
 class BitcoinExchange
 {
@@ -28,19 +29,29 @@ class BitcoinExchange
 
 		//Public Member Functions
 		void	displayDB( void );
+		void 	save_line(std::string line, int fline);
+		void	parse_db( void );
 
-		void parse_save_line(std::string line);
-
+		static bool parse_date(std::string date);
+		static bool check_date(std::string syear, std::string smonth, std::string sday);
+		static bool is_integer(std::string str);
+		static bool is_pflaot(std::string str);
+		static bool is_leap_year(int year);
+		static bool check_value(std::string value);
 
 		// Getter
 		std::map<std::string, std::string>& getMap( void );
 
+
 		// Exceptions
 		class BadInputException: public std::exception
 		{
-			const char * what(unsigned int line) const throw();
+			private:
+				int	line;
+			public:
+				BadInputException(int line):line(line){}
+				const char * what() const throw();
 		};
-
 		class NotAPositiveNumberException: public std::exception
 		{
 			const char * what() const throw();

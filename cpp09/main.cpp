@@ -38,7 +38,7 @@ int	main()
 	// std::string date = line.substr(0, sepIdx);
 	// std::string value =  line.substr(sepIdx+1);
 	// std::cout << "date: " << date << ", value: " << value << std::endl;
-	try
+/* 	try
 	{
 		BitcoinExchange BT("hello");
 		BT.displayDB();
@@ -46,8 +46,10 @@ int	main()
 	catch(const std::exception& e)
 	{
 		std::cerr << e.what() << '\n';
-	}
+	} */
 	
-
+	// BitcoinExchange::parse_date("2000-10-10");
+	BitcoinExchange BT("random");
+	BT.displayDB();
 	return (0);
 }
