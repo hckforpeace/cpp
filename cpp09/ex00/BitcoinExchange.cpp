@@ -13,16 +13,16 @@ BitcoinExchange::BitcoinExchange()
 
 BitcoinExchange::BitcoinExchange(std::string inputFile): _inputFile(inputFile)
 {
-	// this->infile_stream.open(this->_inputFile.c_str(), std::ios::in);
-	// if (this->infile_stream.is_open())
-	// {
 	this->loadDb();
-	// }
-	// else
-	// {
-		// std::cerr << "ICI" << std::endl;
-		// throw (BitcoinExchange::BadInputException());
-	// }	
+	this->infile_stream.open(this->_inputFile.c_str(), std::ios::in);
+	if (this->infile_stream.is_open())
+	{
+		this->loadInfile();
+	}
+	else
+	{
+		std::cout << "Error: could not open file." << std::endl;
+	}	
 }
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange& src)
@@ -38,8 +38,6 @@ BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& src)
 	this->_db = src._db;
 	return (*this);
 }
-
-
 
 /* ************************************************************************** */
 /*                                 Exceptions                                 */
@@ -62,11 +60,7 @@ const char * BitcoinExchange::TooLargeNumberException::what() const throw()
 
 const char * BitcoinExchange::BadInputException::what() const throw()
 {
-	std::stringstream str;
-	str << line;
-	static std::string ret = "Wrong input at line " + str.str();
-	return (ret.c_str());
-	// str << 
+	return ("Error: could not open file.");
 }
 
 /* ************************************************************************** */
@@ -82,8 +76,8 @@ void	BitcoinExchange::loadDb( void )
 	{
 		std::getline(database, line);		
 		if (line.compare("date,exchange_rate"))
-			throw BitcoinExchange::BadInputException(0);
-		int fline = 1;
+			throw BitcoinExchange::BadInputException();
+		int fline = 2;
 		while (std::getline(database, line))
 		{
 			this->save_line(line, fline);
@@ -95,6 +89,43 @@ void	BitcoinExchange::loadDb( void )
 		throw BitcoinExchange::CouldNotOpenFileException();
 }
 
+void	BitcoinExchange::loadInfile( void )
+{
+/* 	std::ifstream database;
+	database.open(DB_NAME, std::ios::in);
+	std::string line;
+	if (database.is_open())
+	{
+		std::getline(database, line);		
+		if (line.compare("date,exchange_rate"))
+			throw BitcoinExchange::BadInputException();
+		int fline = 2;
+		while (std::getline(database, line))
+		{
+			this->save_line(line, fline);
+			fline++;
+		}
+		parse_db();
+	}
+	else
+		throw BitcoinExchange::CouldNotOpenFileException(); */
+	std::string line;
+	std::getline(this->infile_stream, line);
+	if (line.compare("date | value"))
+		std::cout << "Wrong Header" << std::endl;
+	while (std::getline(this->infile_stream, line))
+	{
+		try
+		{
+			
+		}
+		catch (const std::exception& e)
+		{
+			std::cerr << e.what() << '\n';
+		}
+	}
+}
+
 /* ************************************************************************** */
 /*                           	  Getter                             	      */
 /* ************************************************************************** */
@@ -103,12 +134,6 @@ std::map<std::string, std::string>& BitcoinExchange::getMap( void )
 {
 	return (this->_db);
 }
-
-/* ************************************************************************** */
-/*                             Private Member Function                         */
-/* ************************************************************************** */
-
-
 
 /* ************************************************************************** */
 /*                             Public member functions                        */
@@ -124,26 +149,45 @@ void BitcoinExchange::save_line(std::string line, int fline)
 {
 	int sepIdx = line.find(',');
 	if (line.empty() || line.find(',') == std::string::npos)
-		throw BitcoinExchange::BadInputException(fline);
+		throw std::runtime_error(concat_str("Wrong Format", fline));
 	else
 		this->_db.insert(std::pair<std::string, std::string>(line.substr(0, sepIdx), line.substr(sepIdx + 1)));
 }
 
 void	BitcoinExchange::parse_db( void )
 {
-	int i = 1;
+	int i = 2;
 	for (std::map<std::string, std::string>::iterator it = this->_db.begin(); it != this->_db.end(); it++)
 	{
 		std::string date = it->first;
 		std::string value = it->second;
-		if (!parse_date(date))
-			throw BitcoinExchange::BadInputException(i);
-		is_pflaot(value);
+		try
+		{
+			parse_date(date, i);
+		}
+		catch(const std::exception& e)
+		{
+			std::cerr << date << " " << e.what() << '\n';
+			break ;
+		}
+		try
+		{
+			check_value(value, i);
+		}
+		catch(const std::exception& e)
+		{
+			std::cerr << value << " " << e.what() << '\n';
+			break ;
+		}
 		i++;
 	}
 }
 
-bool BitcoinExchange::parse_date(std::string date)
+/* ************************************************************************** */
+/*                             Public Static member functions                 */
+/* ************************************************************************** */
+
+void BitcoinExchange::parse_date(std::string date, int line)
 {
 	std::string year;
 	std::string month;
@@ -153,18 +197,51 @@ bool BitcoinExchange::parse_date(std::string date)
 
 	sep1 = date.find('-');
 	if (sep1 == std::string::npos)
-		return (false);
+		throw std::runtime_error(concat_str("Wrong Format", line));
 	year = date.substr(0, sep1);
 	sep2 = date.substr(sep1 + 1).find('-');
 	if (sep2 == std::string::npos)
-		return (false);
+		throw std::runtime_error(concat_str("Wrong Format", line));
 	month = date.substr(sep1 + 1, sep2);
 	day = date.substr(date.find_last_of("-") + 1);
 
-	if (month.length() != 2 || day.length() != 2 || !is_integer(year) || ! is_integer(day) || !is_integer(month))
-		return (false);
+	if (month.length() != 2 || day.length() != 2 || !is_integer(year) || ! is_integer(day) || !is_integer(month) || !check_date(year, month, day))
+	{
+		throw std::runtime_error(concat_str("Wrong Format", line));
+	}
+}
 
-	// std::cout << "year: " << year << ", month: " << month << ", day: " << day << std::endl;
+bool BitcoinExchange::check_date(std::string syear, std::string smonth, std::string sday)
+{
+	int	year;
+	int	day;
+	int	month;
+	std::stringstream str;
+
+	str << syear;
+	str >> year;
+
+	str.clear();
+	str << smonth;
+	str >> month;
+
+	str.clear();
+	str << sday;
+	str >> day;
+
+	if (year == 0 || day == 0 || month == 0 || month > 12)
+		return (false);
+	if (is_leap_year(year) && month == 2 && day > 29)
+		return (false);
+	else if (!is_leap_year(year) && month == 2 && day > 28)
+		return (false);
+	if (month != 2)
+	{
+		if ((month == 4 || month == 6 || month == 9 || month == 11) && day > 30)
+			return (false);
+		else if (day > 31)
+			return (false);
+	}
 	return (true);
 }
 
@@ -178,33 +255,27 @@ bool BitcoinExchange::is_integer(std::string str)
 	return (true);
 }
 
-bool BitcoinExchange::check_date(std::string syear, std::string smonth, std::string sday)
+void BitcoinExchange::is_pflaot(std::string str, int line)
 {
-	int	year;
-	int	day;
-	int	month;
-	std::stringstream str;
-
-	str << syear;
-	str >> year;
-
-	str.str("");
-	str << smonth;
-	str >> month;
-
-	str.str("");
-	str << sday;
-	str >> day;
-
-	if (year == 0 || day == 0 || month == 0 || month > 12)
-		return (false);
-	if (is_leap_year(year) && month == 2 && day > 29)
-		return (false);
-	else if (month == 2 && day > 28)
-		return (false);
-	return (true);
+	std::string::iterator it = str.begin();
+	if (*it == '-')
+		it++;
+	for (; it != str.end(); it++)
+	{
+		if (*it == '.')
+			break ;
+		if (!(*it >= '0' && *it <= '9'))
+			throw std::runtime_error(concat_str("Wrong Format", line));
+	}
+	if (it == str.end())
+		return ;
+	it++;
+	for (; it != str.end(); it++)
+	{
+		if (!(*it >= '0' && *it <= '9'))
+			throw std::runtime_error(concat_str("Wrong Format", line));
+	}
 }
-
 
 bool BitcoinExchange::is_leap_year(int year)
 {
@@ -216,25 +287,28 @@ bool BitcoinExchange::is_leap_year(int year)
 	return (false);
 }
 
-bool BitcoinExchange::is_pflaot(std::string str)
+
+std::string &BitcoinExchange::concat_str(std::string error, int line)
 {
-	if (str.at(0) == '-')
-		throw BitcoinExchange::NotAPositiveNumberException();
-	std::string::iterator it = str.begin();
-	for (; it != str.end(); it++)
-	{
-		if (*it == '.')
-			break ;
-		if (!(*it >= '0' && *it <= '9'))
-			throw false;
-	}
-	if (it == str.end())
-		return (true);
-	it++;
-	for (; it != str.end(); it++)
-	{
-		if (!(*it >= '0' && *it <= '9'))
-			return (false);
-	}
-	return (true);
+	static std::string message;
+	std::stringstream str;
+	str << error;
+	str << " at line: ";
+	str << line;
+
+	message = str.str();
+	return message;
+}
+
+void BitcoinExchange::check_value(std::string value, int line )
+{
+	is_pflaot(value, line);
+	float fvalue;
+	std::stringstream str;
+	str << value;
+	str >> fvalue;
+	if (fvalue > 2147483647.0)
+		throw std::runtime_error(concat_str("Error: too large number", line));
+	if (fvalue < 0.0)
+		throw std::runtime_error(concat_str("Error: not a positive number", line));
 }

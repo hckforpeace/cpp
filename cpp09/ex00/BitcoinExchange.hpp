@@ -32,12 +32,14 @@ class BitcoinExchange
 		void 	save_line(std::string line, int fline);
 		void	parse_db( void );
 
-		static bool parse_date(std::string date);
+		// Static Member Functions
+		static void parse_date(std::string date, int line);
 		static bool check_date(std::string syear, std::string smonth, std::string sday);
 		static bool is_integer(std::string str);
-		static bool is_pflaot(std::string str);
+		static void is_pflaot(std::string str, int line);
 		static bool is_leap_year(int year);
-		static bool check_value(std::string value);
+		static std::string &concat_str(std::string error, int line);
+		static void check_value(std::string value, int line);
 
 		// Getter
 		std::map<std::string, std::string>& getMap( void );
@@ -46,10 +48,7 @@ class BitcoinExchange
 		// Exceptions
 		class BadInputException: public std::exception
 		{
-			private:
-				int	line;
 			public:
-				BadInputException(int line):line(line){}
 				const char * what() const throw();
 		};
 		class NotAPositiveNumberException: public std::exception
