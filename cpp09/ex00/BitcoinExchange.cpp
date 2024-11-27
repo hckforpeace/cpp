@@ -1,68 +1,5 @@
 #include "BitcoinExchange.hpp"
 
-BitcoinExchange::~BitcoinExchange()
-{
-
-}
-
-
-BitcoinExchange::BitcoinExchange()
-{
-}
-
-
-BitcoinExchange::BitcoinExchange(std::string inputFile): _inputFile(inputFile)
-{
-	this->loadDb();
-	this->infile_stream.open(this->_inputFile.c_str(), std::ios::in);
-if (this->infile_stream.is_open())
-{
-	this->loadInfile();
-}
-else
-{
-	std::cout << "Error: could not open file." << std::endl;
-}	
-}
-
-BitcoinExchange::BitcoinExchange(const BitcoinExchange& src)
-{
-	*this = src;
-}
-
-BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& src)
-{
-	if (this == &src)
-		return (*this);
-	this->_inputFile = src._inputFile;
-	this->_db = src._db;
-	return (*this);
-}
-
-/* ************************************************************************** */
-/*                                 Exceptions                                 */
-/* ************************************************************************** */
-
-const char * BitcoinExchange::CouldNotOpenFileException::what() const throw()
-{
-	return ("could not open file");
-}
-
-const char * BitcoinExchange::NotAPositiveNumberException::what() const throw()
-{
-	return ("not a positive number.");
-}
-
-const char * BitcoinExchange::TooLargeNumberException::what() const throw()
-{
-	return ("too large a number.");
-}
-
-const char * BitcoinExchange::BadInputException::what() const throw()
-{
-	return ("Error: could not open file.");
-}
-
 /* ************************************************************************** */
 /*                             Private Member Functions                       */
 /* ************************************************************************** */
@@ -76,7 +13,7 @@ void	BitcoinExchange::loadDb( void )
 	{
 		std::getline(database, line);		
 		if (line.compare("date,exchange_rate"))
-			throw BitcoinExchange::BadInputException();
+			throw std::runtime_error("Error: wrong header");
 		int fline = 2;
 		while (std::getline(database, line))
 		{
@@ -86,7 +23,7 @@ void	BitcoinExchange::loadDb( void )
 		parse_db();
 	}
 	else
-		throw BitcoinExchange::CouldNotOpenFileException();
+		throw std::runtime_error("Error: could not open file");
 }
 
 void	BitcoinExchange::loadInfile( void )
@@ -109,12 +46,53 @@ void	BitcoinExchange::loadInfile( void )
 }
 
 /* ************************************************************************** */
-/*                           	  Getter                             	      */
+/*                             Canonical Form                                 */
 /* ************************************************************************** */
 
-std::map<std::string, std::string>& BitcoinExchange::getMap( void )
+BitcoinExchange::~BitcoinExchange(){}
+
+
+BitcoinExchange::BitcoinExchange(): _inputFile("input.txt")
 {
-	return (this->_db);
+	this->loadDb();
+	this->infile_stream.open(this->_inputFile.c_str(), std::ios::in);
+	if (this->infile_stream.is_open())
+	{
+		this->loadInfile();
+	}
+	else
+	{
+		std::cout << "Error: could not open file." << std::endl;
+	}
+}
+
+
+BitcoinExchange::BitcoinExchange(std::string inputFile): _inputFile(inputFile)
+{
+	this->loadDb();
+	this->infile_stream.open(this->_inputFile.c_str(), std::ios::in);
+	if (this->infile_stream.is_open())
+	{
+		this->loadInfile();
+	}
+	else
+	{
+		std::cout << "Error: could not open file." << std::endl;
+	}
+}
+
+BitcoinExchange::BitcoinExchange(const BitcoinExchange& src)
+{
+	*this = src;
+}
+
+BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange& src)
+{
+	if (this == &src)
+		return (*this);
+	this->_inputFile = src._inputFile;
+	this->_db = src._db;
+	return (*this);
 }
 
 /* ************************************************************************** */
@@ -180,7 +158,10 @@ std::string&	BitcoinExchange::get_closest_value(std::string date, std::string va
 
 	if (_db.size() == 0)
 		return (empty);
-	for (std::map<std::string, std::string>::iterator it = _db.begin(); it != _db.end(); it++)
+	std::map<std::string, std::string>::iterator it = _db.begin();
+	if (date.compare(it->first) < 0)
+		throw (std::runtime_error("Error: no smaller date in database than " + date));
+	for (; it != _db.end(); it++)
 	{
 		if (!it->first.compare(date))
 		{
@@ -366,4 +347,13 @@ void BitcoinExchange::check_value(std::string value, int line )
 		throw std::runtime_error(concat_str("Error: too large a number", line));
 	if (fvalue < 0.0)
 		throw std::runtime_error(concat_str("Error: not a positive number", line));
+}
+
+/* ************************************************************************** */
+/*                           	  Getter                             	      */
+/* ************************************************************************** */
+
+std::map<std::string, std::string>& BitcoinExchange::getMap( void )
+{
+	return (this->_db);
 }

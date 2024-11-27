@@ -45,27 +45,6 @@ class BitcoinExchange
 
 		// Getter
 		std::map<std::string, std::string>& getMap( void );
-
-		// Exceptions
-		class BadInputException: public std::exception
-		{
-			public:
-				const char * what() const throw();
-		};
-		class NotAPositiveNumberException: public std::exception
-		{
-			const char * what() const throw();
-		};
-
-		class TooLargeNumberException: public std::exception
-		{
-			const char * what() const throw();
-		};
-
-		class CouldNotOpenFileException: public std::exception
-		{
-			const char * what() const throw();
-		};
 };
 
 #endif
