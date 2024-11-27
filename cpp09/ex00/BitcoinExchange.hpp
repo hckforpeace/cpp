@@ -33,6 +33,8 @@ class BitcoinExchange
 		void	parse_db( void );
 
 		// Static Member Functions
+		static std::string&	get_closest_value(std::string date, std::string value, std::map<std::string, std::string> _db);
+		static void parse_infile(std::string str, std::map<std::string, std::string> _db);
 		static void parse_date(std::string date, int line);
 		static bool check_date(std::string syear, std::string smonth, std::string sday);
 		static bool is_integer(std::string str);
@@ -43,7 +45,6 @@ class BitcoinExchange
 
 		// Getter
 		std::map<std::string, std::string>& getMap( void );
-
 
 		// Exceptions
 		class BadInputException: public std::exception

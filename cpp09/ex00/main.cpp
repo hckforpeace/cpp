@@ -43,7 +43,6 @@ int	main(int argc, char **argv)
 			std::cerr << e.what() << '\n';
 		}
 	}
-	
 	// std::cout << "is leap year: " << BitcoinExchange::is_leap_year(2024);
 	return (0);
 }
