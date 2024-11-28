@@ -34,7 +34,7 @@ void RPN::parse_input(std::string str)
 			word = str.substr(lst_lim_pos, jumps);
 		}
 		if (!is_number(word) && !is_operator(word))
-			throw std::runtime_error("Wrong input: input should be an integers or operator seprated by a space");
+			throw std::runtime_error("Error");
 		lst_lim_pos = idx + 1;
 		reverse_polish(word);
 	}
@@ -51,14 +51,14 @@ void RPN::reverse_polish(std::string input)
 
 	if (polstack.size() == 0 && is_operator(input))
 	{
-		throw std::runtime_error("Error: Logic error impossible to calculate");
+		throw std::runtime_error("Error");
 	}
 	if (is_operator(input))
 	{
 		temp = polstack.top();
 		polstack.pop();
 		if (polstack.size() == 0)
-			throw std::runtime_error("Error: Logic error impossible to calculate");
+			throw std::runtime_error("Error");
 		str << temp;
 		str >> first;
 		str.clear();
