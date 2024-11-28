@@ -4,13 +4,14 @@
 
 int	main(int argc, char **argv)
 {
-	(void) argv;
-	(void) argc;
-	std::string input = "1 2 3 4 5 6 7 9";
-	// std::cout << input.substr(0, input.find_first_of(' ', 2)) << std::endl;
+	if (argc != 2)
+	{
+		std::cerr << "Wrong number of arguments";
+		return (1);
+	}
 	try
 	{
-		RPN::parse_input(input);
+		RPN quations(argv[1]);
 	}
 	catch(const std::exception& e)
 	{
