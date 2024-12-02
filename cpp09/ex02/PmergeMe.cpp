@@ -5,9 +5,9 @@ PmergeMe::PmergeMe(std::string* param, int size)
 	std::vector<int> *step1;
 	for (int i = 0; i < size; i++)
 		parse_add(param[i]);
-	step1 = sort_pair(&this->tabv);
-	display(*step1);
-	delete step1;
+	sort_pair(this->tabv, 2);
+	display(this->tabv);
+	// delete step1;
 }
 
 void PmergeMe::parse_add( std::string str )
@@ -48,7 +48,7 @@ void PmergeMe::display(std::vector<int> tab)
 }
 
 
-std::vector<int> *PmergeMe::sort_pair(std::vector<int> *tab)
+/* std::vector<int> *PmergeMe::sort_pair(std::vector<int> *tab)
 {
 	std::vector<int> *left;
 	std::vector<int> *right;
@@ -58,67 +58,142 @@ std::vector<int> *PmergeMe::sort_pair(std::vector<int> *tab)
 	int size = tab->size();
 
 	
-	if (size == 2 || size == 3)
-	{
-		sort2(*tab);
-		// std::cout << std::string(50, '*') << "size: " <<  size << std::endl;
-		// display(*tab);
-		// std::cout << std::string(50, '*') << std::endl;
+	if (size == 1)
 		return (tab);
-	}
-	if (size % 2 == 0 && size / 2 % 2 == 1)
-	{
-		if ((size / 2) - 1 == 2)
-		{
-			left_temp.insert(left_temp.begin(), tab->begin(), tab->begin() + (size / 2) + 1);
-			right_temp.insert(right_temp.begin(), tab->begin() + (size / 2) + 1, tab->end());
-		}
-		else
-		{
-			left_temp.insert(left_temp.begin(), tab->begin(), tab->begin() + (size / 2) - 1);
-			right_temp.insert(right_temp.begin(), tab->begin() + (size / 2) - 1, tab->end());
-		}
-	}
-	else
+
+	if ((size / 2) % 2 == 1)
 	{
 		left_temp.insert(left_temp.begin(), tab->begin(), tab->begin() + (size / 2));
 		right_temp.insert(right_temp.begin(), tab->begin() + (size / 2), tab->end());
 	}
-	std::cout << "size: " << size << std::endl;
-	std::cout << "temp_left size: " << left_temp.size() << std::endl;
+	else
+	{
+		left_temp.insert(left_temp.begin(), tab->begin(), tab->begin() + (size / 2) + 1);
+		right_temp.insert(right_temp.begin(), tab->begin() + (size / 2) + 1, tab->end());
+	}
+
+	std::cout << "left size: " << left_temp.size() << std::endl;
 	display(left_temp);
-	std::cout << "temp_right size: " << right_temp.size() << std::endl;
+	std::cout << "right size: " << right_temp.size() << std::endl;
 	display(right_temp);
+	std::cout << std::string(50, '*') << std::endl;
+
+
 	left = sort_pair(&left_temp);
 	right = sort_pair(&right_temp);
-	std::cout << "size: " << size << std::endl;
-	std::cout << "left size: " << left->size() << std::endl;
-	display(*left);
-	std::cout << "right size: " << right->size() << std::endl;
-	display(*right);
-	if (get_max(*left, *right) == 0	)
+
+	// std::cout << "left size: " << left->size() << std::endl;
+	// display(*left);
+	// std::cout << "right size: " << right->size() << std::endl;
+	// display(*right);
+	// std::cout << std::string(50, '*') << std::endl;
+
+	if (get_max(*left, *right) == 0)
 	{
-		// std::cout << "right first"<< std::endl;
 		ret = new std::vector<int>(right->begin(), right->end());
 		ret->insert(ret->begin() + ret->size(), left->begin(), left->end());
 	}
 	else
 	{
-		// std::cout << "left first" << std::endl;
 		ret = new std::vector<int>(left->begin(), left->end());
 		ret->insert(ret->begin() + ret->size(), right->begin(), right->end());
 	}
 	if (size % 2)
 		ret->insert(ret->begin() + ret->size(), tab->back());
-	std::cout << "ret :";
-	display(*ret);
+	// std::cout << "ret :";
+	// display(*ret);
 	if (tab->size() >= 8)
 	{
 		delete left;
 		delete right;
 	}
 	return (ret);
+} */
+int	PmergeMe::get_max(std::vector<int> tabv, int idx, int end)
+{
+	int max = tabv[idx];
+	while (idx < end)
+	{
+		if (idx + 1 == end)
+			return (max);
+		if (max < tabv[idx + 1])
+			max = tabv[idx + 1];
+		idx++;
+	}
+	return (max);
 }
+
+bool PmergeMe::is_sorted(std::vector<int> tabv, int begin, int steps)
+{
+/* 		std::cerr << "not sorted" << std::endl;
+	if (steps == 1)
+	{
+		std::cout << "Comparing: " << tabv[begin] << " and " << tabv[begin + 1] << std::endl;
+		if (tabv[begin] > tabv[begin + 1])
+			return (false);
+		return (true);
+	} */
+	int max_left = get_max(tabv, begin, begin + steps / 2);
+	int max_right = get_max(tabv, begin + (steps / 2), begin + steps);
+	std::cerr << "left: " << max_left << " right: " << max_right << " steps: " << steps << std::endl;
+	if (max_left < max_right)
+		return (true);
+	return (false);
+}
+
+void	PmergeMe::swap(std::vector<int> &tabv, int begin, int steps)
+{
+/* 	if (steps == 1)
+	{
+		int temp = tabv[begin];
+		tabv[begin] = tabv[begin + 1];
+		tabv[begin + 1] = temp;
+		return ;
+	} */
+	std::cout << "begin: " << begin << ", steps: " << steps << std::endl;
+	std::vector<int> temp;
+	temp.insert(temp.begin(), tabv.begin() + begin, tabv.begin() + begin + (steps / 2));
+	
+	for (std::vector<int>::iterator it = temp.begin(); it != temp.end(); it++)
+		std::cout << "Iterator: " << *it  << std::endl ;
+	std::cout << "size: " << temp.size() << std::endl;
+	for (int i = begin; i < begin + (steps / 2); i++)
+	{
+		std::cout << "copying: " << tabv[i + (steps / 2)] << std::endl;
+		tabv[i] = tabv[i + (steps / 2)]; 
+	}
+	for (int i = begin + (steps / 2); i < begin + steps; i++)
+	{
+		// std::cout << "tabv[" << i << "]" << " = " << "temp[" << (begin + (steps / 2)) - i << "]" << " = " << temp[(begin + (steps / 2)) - i] << std::endl;
+		tabv[i] = temp[i - (begin + (steps / 2))];
+	}
+	// tabv.insert(tabv.begin() + begin + (steps / 2) - 1, temp.begin(), temp.end());
+}
+
+void PmergeMe::sort_pair(std::vector<int> &tab, int pairs)
+{
+	int size = tab.size(); 
+	if (size / (pairs / 2)	 < 2)
+		return ;
+	std::cout << std::string(50, '*') << pairs << std::endl;
+	for (int i = 0; i < size; i += pairs)
+	{
+		if (i + pairs > size)
+		{
+			std::cerr << "i + pairs=" << i+ pairs << ">=" << size << "IMPOSSIBLE" << std::endl;
+			break;
+		}
+		if (!is_sorted(tab, i, pairs))
+		{
+			swap(tab, i, pairs);
+		}
+		display(tab);
+	}
+	sort_pair(tab, pairs * 2);
+}
+
+
+
 
 void sort2(std::vector<int>& tab)
 {
