@@ -8,7 +8,7 @@ CXX= c++
 
 # CXXFLAFGS= -Wall -Werror -Wextra
 
-# STD= -std=c++98
+STD= -std=c++98
 
 all: $(NAME)
 

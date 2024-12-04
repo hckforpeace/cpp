@@ -2,12 +2,10 @@
 
 PmergeMe::PmergeMe(std::string* param, int size)
 {
-	std::vector<int> *step1;
 	for (int i = 0; i < size; i++)
 		parse_add(param[i]);
 	sort_pair(this->tabv, 2);
-	display(this->tabv);
-	// delete step1;
+	display(this->tabv, -1);
 }
 
 void PmergeMe::parse_add( std::string str )
@@ -36,13 +34,25 @@ bool PmergeMe::is_integer(std::string str)
 	return (true);
 }
 
-void PmergeMe::display(std::vector<int> tab)
+void PmergeMe::display(std::vector<int> tab, int pairs)
 {
+	int i = 0;
 	for (std::vector<int>::iterator it = tab.begin(); it != tab.end(); it++)
 	{
+		if (i == 0)
+			std::cout << "(";
 		std::cout << *it;
-		if (it + 1 != tab.end())
+		if (i == (pairs / 2 - 1))
+			std::cout << ", ";
+		else if (it + 1 != tab.end())
 			std::cout << " ";
+		if (i == pairs - 1)
+		{
+			std::cout << ")";		
+			i = 0;
+		}
+		else 
+			i++;
 	}
 	std::cout << std::endl;
 }
@@ -109,6 +119,13 @@ void PmergeMe::display(std::vector<int> tab)
 	}
 	return (ret);
 } */
+
+int	PmergeMe::get_Jacobsthal(int i)
+{
+	int jacobsthal[16] = {1, 3, 15, 55, 231, 903, 3655, 14535, 58311, 232903, 932295,  3727815, 14913991, 59650503, 238612935, 954429895};
+	return (jacobsthal[i - 1]);
+}
+
 int	PmergeMe::get_max(std::vector<int> tabv, int idx, int end)
 {
 	int max = tabv[idx];
@@ -170,8 +187,29 @@ void	PmergeMe::swap(std::vector<int> &tabv, int begin, int steps)
 	// tabv.insert(tabv.begin() + begin + (steps / 2) - 1, temp.begin(), temp.end());
 }
 
+void	PmergeMe::binary_insertion(std::vector<int> &tab, int tab_idx, std::vector<int> element, int idx_element, int pair)
+{
+	while (tab_idx > 0 && tab[tab_idx] > element[idx_element])
+	{
+		tab_idx -= pair / 2;
+	}
+	// std::cout << "tab_idx: " << tab_idx  << ", tab[tab_idx]" << tab[tab_idx] << std::endl;
+	// std::cout << "idx: " <<idx_element - (pair / 2) + 1 << " element[idx_element], " << element[idx_element] << std::endl;
+	// std::cerr << "ici" << std::endl;
+	if (tab_idx <= 0)
+		tab.insert(tab.begin(), element.begin() + idx_element - (pair / 2) + 1, element.begin() + idx_element + 1);
+	else
+		tab.insert(tab.begin() + tab_idx + 1, element.begin() + idx_element - (pair / 2) + 1, element.begin() + idx_element + 1);
+}
+
 void PmergeMe::sort_pair(std::vector<int> &tab, int pairs)
 {
+	std::vector<int> main;
+	std::vector<int> pend;
+	std::vector<int> odd;
+	int jacobs_num;
+	int main_anum = 0; 
+
 	int size = tab.size(); 
 	if (size / (pairs / 2)	 < 2)
 		return ;
@@ -184,12 +222,63 @@ void PmergeMe::sort_pair(std::vector<int> &tab, int pairs)
 			break;
 		}
 		if (!is_sorted(tab, i, pairs))
-		{
 			swap(tab, i, pairs);
-		}
-		display(tab);
+		display(tab, pairs);
 	}
 	sort_pair(tab, pairs * 2);
+
+	// Insert in the main {a1, b1}
+	main.insert(main.begin(), tab.begin(), tab.begin() + pairs);
+
+	// Insert all the a's in the main
+	std::cout << "Pairs: " << pairs << std::endl;
+	for (int i = pairs; i < size; i += pairs)
+	{
+		if (i + (pairs) >= size)
+		{
+			// Insert in the odd
+			if (i + pairs / 2 < size)
+				odd.insert(odd.begin(), tab.begin() + pairs + (pairs * main_anum), tab.begin() + pairs + (pairs * main_anum) + (pairs / 2));
+			// TODO Put the odd			
+			break ;
+		}
+		// std::cout << "i: " << i << std::endl;
+		// std::cout << "pairs: " << pairs << std::endl;
+		// std::cout << "main_size: " << main.size() << std::endl;
+		// std::cout << "from: " << pairs + (pairs * main_anum) + (pairs / 2) << ", to : " << pairs + (pairs * main_anum) + pairs << std::endl;
+		// Insert in the main
+		main.insert(main.begin() + main.size(), tab.begin() + pairs + (pairs * main_anum) + (pairs / 2), tab.begin() + pairs + (pairs * main_anum) + pairs);
+		// Insert in the pend
+		pend.insert(pend.begin() + pend.size(), tab.begin() + pairs + (pairs * main_anum), tab.begin() + pairs + (pairs * main_anum) + (pairs / 2));
+		main_anum++;
+	}
+
+	int i = 1;
+	int	initial_main_size = main.size();
+	int	initial_pend = pend.size();
+	int	initial_main_size = main.size();
+	int inserted_from_pend = 0;
+	int	idx_of_pend_insert;
+	while (pend.size() != 0)
+	{
+		jacobs_num = get_Jacobsthal(i);
+		i++;
+		while (jacobs_num != 0)
+		{
+			idx_of_pend_insert = initial_pend - jacobs_num	;
+
+		}
+	}
+
+	std::cout << "tab: ";
+	display(tab, -1);
+	std::cout << "main :"; 
+	display(main, pairs);
+	std::cout << "pend :"; 
+	display(pend, pairs);
+	std::cout << "odd :"; 
+	display(odd, pairs);
+	// binary_insertion(tab[7], pend, 3);
 }
 
 
