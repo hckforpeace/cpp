@@ -4,6 +4,7 @@
 #include <iostream>
 #include <vector>
 #include <sstream>
+#include <algorithm>
 
 class PmergeMe
 {
@@ -18,8 +19,9 @@ class PmergeMe
 		static bool is_sorted(std::vector<int> tabv, int begin, int steps);
 		static int	get_max(std::vector<int> tabv, int begin, int steps);
 		static void	swap(std::vector<int> &tabv, int begin, int steps);
-		static void	binary_insertion(std::vector<int> &tab, int tab_idx, std::vector<int> element, int idx_element, int pair);
+		static void	binary_insertion(std::vector<int> &tab, int tab_idx, std::vector<int> &element, int idx_element, int pair);
 		static int	get_Jacobsthal(int i);
+		// static int get_a_of_b(std::vector<int>())
 };
 
 void sort2(std::vector<int>& tab);

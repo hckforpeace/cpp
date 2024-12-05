@@ -5,19 +5,19 @@ int get_max(std::vector<int>& left, std::vector<int>& right);
 
 int	main(int argc, char** argv)
 {
-	// std::string input[argc - 1];
-	// for (int i = 1; i < argc; i++)
-	// 	input[i - 1] = argv[i];
-	// try
-	// {
-	// 	PmergeMe obj(input, argc - 1);
-	// 	// obj.display();
-	// }
-	// catch(const std::exception& e)
-	// {
-	// 	std::cerr << e.what() << '\n';
-	// }
-	std::cout << PmergeMe::get_Jacobsthal(3);
+	std::string input[argc - 1];
+	for (int i = 1; i < argc; i++)
+		input[i - 1] = argv[i];
+	try
+	{
+		PmergeMe obj(input, argc - 1);
+		// obj.display();
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+	// std::cout << PmergeMe::get_Jacobsthal(3);
 // std::cout << 0 % 8 << std::endl;
 	// std::vector<int> v1 = {23};
 	// std::vector<int> v2 = {1222};
@@ -38,12 +38,12 @@ int	main(int argc, char** argv)
 	// std::vector<int> u;
 	// std::cout << PmergeMe::is_sorted(s, 8, 4);
 
-	// for (int i = 0; i < u.size(); i++)
+	// for (int i = 0; i < u.size(); i++) 	
 		// std::cout << u[i] << std::endl;
-	std::vector<int> pend = {9, 18, 14, 17};
-	std::vector<int> main = {6, 15, 8, 16, 2, 11, 0, 19, 3, 10, 1, 21};
+	std::vector<int> pend = {2, 3, 5, 7};
+	std::vector<int> main = {3, 10, 11, 12};
 
-	PmergeMe::binary_insertion(main, 11, pend, 3, 8);
+	PmergeMe::binary_insertion(main, 3, pend, 0, 2);
 
 	for (std::vector<int>::iterator it = main.begin(); it != main.end(); it++)
 	{
