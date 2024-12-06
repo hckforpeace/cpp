@@ -4,6 +4,7 @@ PmergeMe::PmergeMe(std::string* param, int size)
 {
 	for (int i = 0; i < size; i++)
 		parse_add(param[i]);
+	display(this->tabv, -1);
 	sort_pair(this->tabv, 2);
 	display(this->tabv, -1);
 }
@@ -230,7 +231,7 @@ void PmergeMe::sort_pair(std::vector<int> &tab, int pairs)
 	int size = tab.size(); 
 	if (size / (pairs / 2)	 < 2)
 		return ;
-	std::cout << std::string(50, '*') << pairs << std::endl;
+	// std::cout << std::string(50, '*') << pairs << std::endl;
 	for (int i = 0; i < size; i += pairs)
 	{
 		if (i + pairs > size)
@@ -249,19 +250,14 @@ void PmergeMe::sort_pair(std::vector<int> &tab, int pairs)
 
 	display(tab, pairs);
 	// Insert all the a's in the main
-	std::cout << "Pairs: " << pairs << std::endl;
+	// std::cout << "Pairs: " << pairs << std::endl;
 	for (int i = pairs; i < size; i += pairs)
 	{
 		if (i + (pairs) > size)
 		{
 			// Insert in the odd
-			std::cout << "Enregistrer les OODDDDSS" << "i + pairs / 2: " << i + (pairs / 2) << std::endl;
-			std::cout << "size" << size <<  std::endl;
 			if (i + (pairs / 2) - 1 < size)
-			{
-				std::cout << "ici" << std::endl;
 				odd.insert(odd.begin(), tab.begin() + pairs + (pairs * main_anum), tab.begin() + pairs + (pairs * main_anum) + (pairs / 2));
-			}
 			// TODO Put the odd
 			break ;
 		}
@@ -272,14 +268,12 @@ void PmergeMe::sort_pair(std::vector<int> &tab, int pairs)
 	}
 
 	int i = 1;
-	int	initial_main_size = main.size();
-	int	initial_pend_size = pend.size();
 	int pairs_to_insert_in_main;
-	int	pos_to_insert;
 	int inserted_from_pend = 0;
 	int	number_of_first_pend;
 	int a;
 	int b;
+	unsigned int comp;
 
 	std::cout << "main: ";
 	display(main, pairs);
@@ -294,27 +288,40 @@ void PmergeMe::sort_pair(std::vector<int> &tab, int pairs)
 			jacobs_num = get_Jacobsthal(i);
 			i++;
 			number_of_first_pend = inserted_from_pend + 2;
-			std::cout << "number_of_first_pend: " << number_of_first_pend << std::endl;
-			if (jacobs_num > pend.size() / (pairs / 2))
+/* 			if (jacobs_num > pend.size() / (pairs / 2))
 			{
 				std::cout << "OUT" << std::endl;
 				pos_to_insert = pend.size() - 1;
 				jacobs_num = pend.size() / (pairs / 2) + 1;
 				std::cout << "new num jacob: " << jacobs_num << std::endl;
-			}
+			} */
 			// std::cout << "idx of b: " << pos_to_insert << std::endl;
-			b = (jacobs_num - 1) * (pairs / 2) - 1;
+			// b = (jacobs_num - 1) * (pairs / 2) - 1;
+			// TODO
+			// std::cout << "number_of_first_pend: " << number_of_first_pend << std::endl;
+			// std::cout << "Jacobsthal Number: " << jacobs_num << std::endl;
+			b = ((jacobs_num - 1) - number_of_first_pend) * (pairs / 2) + 1;
+			// std::cout << "b post modif: " << b << std::endl;
+			// std::cout << "(pend.size() / (pairs / 2)): " << (pend.size() / (pairs / 2)) << std::endl;
+			// comp = b;
+			if (b > (pend.size() / (pairs / 2)))
+			{
+				// std::cout << "Changin Jacobsthal number" << std::endl;;
+				b = pend.size() - 1;
+				jacobs_num = number_of_first_pend + ((pend.size() / (pairs / 2) - 1));
+			}
 			pairs_to_insert_in_main = (b + 1) / (pairs / 2);
+			// std::cout << "Jacobsthal Number: " << jacobs_num << std::endl;
+			// std::cout << "Pairs to insert: " << pairs_to_insert_in_main << std::endl;
 			// break ;
 			for (int i = 0; i < pairs_to_insert_in_main; i++)
 			{
 				a = (inserted_from_pend + jacobs_num) * (pairs / 2) - 1;
-				std::cout << "a: " << a << std::endl;
-				b = (jacobs_num - 1) * (pairs / 2) - 1;
-				std::cout << "b: " << b << std::endl;
+				// std::cout << "a: " << a << std::endl;
+				// b = (jacobs_num - 1) * (pairs / 2) - 1;
+				// std::cout << "b: " << b << std::endl;
 				binary_insertion(main, a, pend, b, pairs);
 
-				//
 				std::cout << "LOOP: " << std::endl;
 				std::cout << "main: ";
 				display(main, pairs);
@@ -322,23 +329,21 @@ void PmergeMe::sort_pair(std::vector<int> &tab, int pairs)
 				display(pend, pairs);
 				std::cout << "odd: ";
 				display(odd, pairs);
+				b -= (pairs / 2);
 				jacobs_num--;
 				inserted_from_pend++;
 			}
-			std::cout << "loop end" << std::endl;
+			// std::cout << "loop end" << std::endl;
 		}
+		// display(tab);
+		if (odd.size() != 0)
+			binary_insertion(main, (main.size() - 1 - (pairs / 2)), odd, odd.size() - 1, pairs);
+		tab.erase(tab.begin(), tab.end());
+		tab.insert(tab.begin(), main.begin(), main.end());
 	}
-	// display(tab);
-	if (odd.size() != 0)
-	{
-		binary_insertion(main, (main.size() - 1 - (pairs / 2)), odd, odd.size() - 1, pairs);
+	// display(main, pairs);
 
-	}
-	display(main, pairs);
-
-	tab.erase(tab.begin(), tab.end());
-	tab.insert(tab.begin(), main.begin(), main.end());
-	std::cout << "here" << std::endl;
+	// std::cout << "here" << std::endl;
 
 	// display(tab, pairs);
 
