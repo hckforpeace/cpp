@@ -14,7 +14,11 @@ class PmergeMe
 		std::vector<int> tabv;
 		std::deque<int> tabq;
 	public:
+		PmergeMe();
 		PmergeMe(std::string* param, int size);
+		~PmergeMe(){};
+		PmergeMe(PmergeMe &cpy);
+		PmergeMe &operator=(PmergeMe &copy);
 
 		//Public functions
 		void parse_add(std::string str);
@@ -30,7 +34,7 @@ class PmergeMe
 		static int	get_max(std::vector<int> tabv, int begin, int steps);
 		static int	get_max_deque(std::deque<int> tabv, int begin, int steps);
 		static void	swap(std::vector<int> &tabv, int begin, int steps);
-		static void	swap_dequeu(std::deque<int> &tabv, int begin, int steps);
+		static void	swap_deque(std::deque<int> &tabv, int begin, int steps);
 		static void	binary_insertion(std::vector<int> &tab, int tab_idx, std::vector<int> &element, int idx_element, int pair);
 		static void	binary_insertion_deque(std::deque<int> &tab, int tab_idx, std::deque<int> &element, int idx_element, int pair);
 		static int	get_Jacobsthal(int i);
