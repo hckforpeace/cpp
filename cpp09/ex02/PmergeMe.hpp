@@ -21,6 +21,7 @@ class PmergeMe
 		static void	swap(std::vector<int> &tabv, int begin, int steps);
 		static void	binary_insertion(std::vector<int> &tab, int tab_idx, std::vector<int> &element, int idx_element, int pair);
 		static int	get_Jacobsthal(int i);
+		static bool is_sorted(std::vector<int> tabv);
 		// static int get_a_of_b(std::vector<int>())
 };
 
