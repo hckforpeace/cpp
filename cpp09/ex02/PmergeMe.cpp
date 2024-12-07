@@ -61,7 +61,9 @@ void PmergeMe::parse_add( std::string str )
 {
 	int	number;
 	if (!is_integer(str))
+	{
 		throw std::runtime_error("Error: " + str + " not an integer !");
+	}
 	std::stringstream sstr;
 	sstr << str;
 	sstr >> number;

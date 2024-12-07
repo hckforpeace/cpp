@@ -13,17 +13,17 @@ void	BitcoinExchange::loadDb( void )
 	{
 		std::getline(database, line);		
 		if (line.compare("date,exchange_rate"))
-			throw std::runtime_error("Error: wrong header");
+			throw std::runtime_error("Error: wrong header.");
 		int fline = 2;
 		while (std::getline(database, line))
 		{
 			this->save_line(line, fline);
 			fline++;
 		}
-		parse_db();
+		// parse_db();
 	}
 	else
-		throw std::runtime_error("Error: could not open file");
+		throw std::runtime_error("Error: could not open file.");
 }
 
 void	BitcoinExchange::loadInfile( void )
@@ -216,7 +216,7 @@ void BitcoinExchange::parse_infile(std::string str, std::map<std::string, std::s
 		throw std::runtime_error("Error: bad input => " + str);
 	month = date.substr(sep1 + 1, sep2);
 	day = date.substr(date.find_last_of("-") + 1);
-	if (month.length() != 2 || day.length() != 2 || !is_integer(year) || ! is_integer(day) || !is_integer(month) || !check_date(year, month, day))
+	if (month.length() != 2 || day.length() != 2 || !is_integer(year) || !is_integer(day) || !is_integer(month) || !check_date(year, month, day))
 		throw std::runtime_error("Error: bad input => " + date);
 	value = str.substr(separator + 3);
 	check_value(value, -1);
@@ -339,14 +339,16 @@ std::string &BitcoinExchange::concat_str(std::string error, int line)
 void BitcoinExchange::check_value(std::string value, int line )
 {
 	is_pflaot(value, line);
-	float fvalue;
+	double fvalue;
 	std::stringstream str;
 	str << value;
 	str >> fvalue;
-	if (fvalue > 2147483647.0)
-		throw std::runtime_error(concat_str("Error: too large a number", line));
+	if (fvalue > 1000)
+	{
+		throw std::runtime_error(concat_str("Error: too large a number.", line));
+	}
 	if (fvalue < 0.0)
-		throw std::runtime_error(concat_str("Error: not a positive number", line));
+		throw std::runtime_error(concat_str("Error: not a positive number.", line));
 }
 
 /* ************************************************************************** */

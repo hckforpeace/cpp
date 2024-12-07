@@ -90,6 +90,9 @@ int	RPN::calculate(int first, int second, std::string a)
 
 bool RPN::is_number(std::string str)
 {
+	int i;
+	std::stringstream sstr;
+	sstr << str;
 	if (!str.compare(""))
 		return (false);
 	std::string::iterator it = str.begin();
@@ -100,6 +103,11 @@ bool RPN::is_number(std::string str)
 		if (!(*it >= '0' && *it <= '9'))
 			return (false);
 	}
+	sstr >> i;
+	if (i > 10)
+		throw std::runtime_error("Error: number bigger than 10");
+	else if (i < 0)
+		throw std::runtime_error("Error: number lesser than 0");
 	return (true);
 }
 
