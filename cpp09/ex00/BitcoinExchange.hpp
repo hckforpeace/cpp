@@ -42,6 +42,7 @@ class BitcoinExchange
 		static bool is_leap_year(int year);
 		static std::string &concat_str(std::string error, int line);
 		static void check_value(std::string value, int line);
+		static void check_value_db(std::string value, int line);
 
 		// Getter
 		std::map<std::string, std::string>& getMap( void );

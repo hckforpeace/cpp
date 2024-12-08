@@ -20,7 +20,7 @@ void	BitcoinExchange::loadDb( void )
 			this->save_line(line, fline);
 			fline++;
 		}
-		// parse_db();
+		parse_db();
 	}
 	else
 		throw std::runtime_error("Error: could not open file.");
@@ -132,7 +132,7 @@ void	BitcoinExchange::parse_db( void )
 		}
 		try
 		{
-			check_value(value, i);
+			check_value_db(value, i);
 		}
 		catch(const std::exception& e)
 		{
@@ -344,6 +344,21 @@ void BitcoinExchange::check_value(std::string value, int line )
 	str << value;
 	str >> fvalue;
 	if (fvalue > 1000)
+	{
+		throw std::runtime_error(concat_str("Error: too large a number.", line));
+	}
+	if (fvalue < 0.0)
+		throw std::runtime_error(concat_str("Error: not a positive number.", line));
+}
+
+void BitcoinExchange::check_value_db(std::string value, int line )
+{
+	is_pflaot(value, line);
+	double fvalue;
+	std::stringstream str;
+	str << value;
+	str >> fvalue;
+	if (fvalue > 2147483647)
 	{
 		throw std::runtime_error(concat_str("Error: too large a number.", line));
 	}

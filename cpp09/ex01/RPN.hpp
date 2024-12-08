@@ -12,6 +12,10 @@ class RPN
 		std::stack<std::string> polstack;
 	public:
 		RPN(std::string operation);
+		RPN();
+		~RPN(){};
+		RPN(const RPN& copy);
+		RPN& operator=(const RPN& copy);
 		void parse_input(std::string str);
 		static bool is_number(std::string str);
 		static bool is_operator(std::string str);

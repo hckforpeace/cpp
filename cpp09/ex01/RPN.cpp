@@ -13,6 +13,32 @@ RPN::RPN(std::string operation):operation(operation)
 	
 }
 
+RPN::RPN()
+{
+	try
+	{
+		parse_input("3 2 *");
+	}
+	catch(const std::exception& e)
+	{
+		std::cerr << e.what() << '\n';
+	}
+}
+
+RPN::RPN(const RPN& copy)
+{
+	*this = copy;
+}
+RPN& RPN::operator=(const RPN& copy)
+{
+	if (this == &copy)
+		return (*this);
+	this->operation = copy.operation;
+	this->polstack = copy.polstack;
+	return (*this);
+}
+
+
 void RPN::parse_input(std::string str)
 {
 	int lst_lim_pos = 0;
